@@ -1,0 +1,21 @@
+{
+  "name": "js",
+  "version": "0.0.1",
+  "homepage": "https://github.com/aleksimonaco/steam-web-api-test",
+  "authors": [
+    "Aleksi Monaco <aleksi.monaco@hotmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "backbone": "~1.2.3",
+    "handlebars": "~4.0.5",
+    "jquery": "~2.1.4"
+  }
+}
