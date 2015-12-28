@@ -1,7 +1,7 @@
 <?php
 require 'vendor/autoload.php';
 
-define("DOMAIN", "http://localhost/SteamTest");
+define("DOMAIN", (getenv("DOMAIN") !== false ? getenv("DOMAIN") : "http://localhost/SteamTest"));
 
 $app = new \Slim\Slim(array(
     'view' => new \Slim\Views\Twig()
