@@ -3,12 +3,12 @@
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
+  "dependencies": {
+    "bower": "~1.3.3"
+  },
   "scripts": {
     "postinstall": "./js/bower install"
   },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "bower": "~1.3.3"
-  }
+  "author": "Aleksi Monaco",
+  "license": "ISC"
 }
