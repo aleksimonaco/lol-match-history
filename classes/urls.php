@@ -13,5 +13,5 @@ $app->get('/game/news', function () use ($app) {
 		"newsitems" => $json["appnews"]["newsitems"],
 		"DOMAIN" => DOMAIN
 	));
-});
+}); 
 ?>
