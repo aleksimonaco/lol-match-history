@@ -3,21 +3,4 @@
 {% block title %}Lolperformance{% endblock %}
 
 {% block content %}
-
-    <h1 class="col-xs-12 col-sm-10 col-sm-offset-1 page-header">Welcome to LolPerformance! <small>Check how you've performed lately</small></h1>
-    <div class="col-xs-12 col-sm-10 col-sm-offset-1">
-        <h2 class="col-xs-12">Type in your summoner name and hit search!</h2>
-        <form class="col-xs-12 col-sm-4"action="{{ DOMAIN }}/search" method="POST">
-            <input class="form-control" name="search_keyword" type="text" />
-            <input class="form-control" name="submit" type="submit" value="Search" />
-        </form>
-        <div class="col-xs-12 col-sm-6">
-            <img src="http://ddragon.leagueoflegends.com/cdn/5.24.2/img/profileicon/{{ summoner.profileIconId }}.png" />
-            <h5>Id: {{ summoner.id }}</h5>
-            <h5>Name: {{ summoner.name }}</h5>
-            <h5>profileIconId: {{ summoner.profileIconId }}</h5>
-            <h5>revisionDate: {{ summoner.revisionDate }}</h5>
-            <h5>summonerLevel: {{ summoner.summonerLevel }}</h5>
-        </div>
-  </div>
 {% endblock %}

@@ -10,11 +10,17 @@ $app->get('/', function () use ($app) {
  *
  */
 $app->post('/search', function () use ($app) {
-	$keyword = $app->request->post('search_keyword');
-	$formatted_keyword = trim(strtolower($keyword));
 
-    $summoner = $app->summonerService->getSummonerByName($formatted_keyword, API_KEY);
+	$json = $app->request->getBody();
+    $data = json_decode($json);
+    $formattedKeyword = trim(strtolower($data->search_keyword));
 
-	$app->render("searchResult.twig", ["DOMAIN" => DOMAIN, "summoner" => $summoner->serializeDataToArray()]);
+    $summoner = $app->summonerService->getSummonerByName($formattedKeyword, API_KEY);
+
+	$response = $app->response();
+    $response['Content-Type'] = 'application/json';
+    $response->body(json_encode(["summoner" => $summoner->serializeDataToArray()]));
+
+    return $response;
 }); 
 ?>
