@@ -1,5 +1,6 @@
 <?php
 require 'vendor/autoload.php';
+require 'config.php';
 
 define("DOMAIN", (getenv("DOMAIN") !== false ? getenv("DOMAIN") : "http://localhost/lol-match-history"));
 
@@ -21,6 +22,9 @@ require 'classes/urls.php';
 require 'classes/models.php';
 require 'classes/services.php';
 require 'classes/mappers.php';
+
+// Initalize required classes
+$app->summonerService = new SummonerService(new SummonerSearchResultMapper());
 
 $app->run();
 

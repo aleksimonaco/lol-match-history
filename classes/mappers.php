@@ -1,10 +1,12 @@
 <?php
 
 class SummonerSearchResultMapper {
-	public static function mapSingleSearchResult($result) {
+
+	public function __construct() {}
+
+	public function mapSingleSearchResult($result) {
 		if (sizeof($result) === 1) {
 			$resultAttributes = reset($result);
-			return $resultAttributes;
 
 			$summoner = new Summoner($resultAttributes["id"],
 										$resultAttributes["name"], 
