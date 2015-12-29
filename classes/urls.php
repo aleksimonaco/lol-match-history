@@ -1,17 +1,20 @@
 <?php
 $app->get('/', function () use ($app) {
-	$app->render("games.twig", array(
+	$app->render("searchResult.twig", array(
 		"DOMAIN" => DOMAIN
 	));
 });
 
-$app->get('/game/news', function () use ($app) {
-    $response = file_get_contents('http://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid=730&count=3&maxlength=300&format=json', false);
-	$json = json_decode($response, true);
+/**
+*
+*
+*/
+$app->post('/search', function () use ($app) {
+	$keyword = $app->request->post('search_keyword');
+	$formatted_keyword = trim(strtolower($keyword));
 
-	$app->render("games.twig", array(
-		"newsitems" => $json["appnews"]["newsitems"],
-		"DOMAIN" => DOMAIN
-	));
+    $summoner = SummonerService::getSummonerByName($formatted_keyword, "a288f1f8-be11-4345-a178-98d619f4d763");
+
+	$app->render("searchResult.twig", ["DOMAIN" => DOMAIN, "summoner" => $summoner]);
 }); 
 ?>
