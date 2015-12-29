@@ -1,50 +1,23 @@
-<!doctype html>
+{% extends "base.twig" %}
 
-<html lang="en">
-<head>
-  <meta charset="utf-8">
+{% block title %}Lolperformance{% endblock %}
 
-  <title>Steam Test</title>
-  <meta name="description" content="Steam Test">
-  <meta name="author" content="Aleksi Monaco">
+{% block content %}
 
-  <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
-  <!--[if lt IE 9]>
-  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
-
-  <style>
-    button {
-      height: 100px;
-      width: 100px;
-      border-radius: 50% !important;
-    }
-  </style>
-</head>
-
-<body>
-
-  <form action="{{ DOMAIN }}/search" method="POST">
-    <input name="search_keyword" type="text" />
-    <input name="submit" type="submit" value="Search" />
-  </form>
-
-  Id: {{ summoner.id }}
-  Name: {{ summoner.name }}
-  profileIconId: {{ summoner.profileIconId }}
-  revisionDate: {{ summoner.revisionDate }}
-  summonerLevel: {{ summoner.summonerLevel }}
-
-  <img src="http://ddragon.leagueoflegends.com/cdn/5.24.2/img/profileicon/{{ summoner.profileIconId }}.png" />
-
-  <script src="../app/js/bower_components/backbone/backbone-min.js"></script>
-</body>
-</html>
+    <h1 class="col-xs-12 col-sm-10 col-sm-offset-1 page-header">Welcome to LolPerformance! <small>Check how you've performed lately</small></h1>
+    <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+        <h2 class="col-xs-12">Type in your summoner name and hit search!</h2>
+        <form class="col-xs-12 col-sm-4"action="{{ DOMAIN }}/search" method="POST">
+            <input class="form-control" name="search_keyword" type="text" />
+            <input class="form-control" name="submit" type="submit" value="Search" />
+        </form>
+        <div class="col-xs-12 col-sm-6">
+            <img src="http://ddragon.leagueoflegends.com/cdn/5.24.2/img/profileicon/{{ summoner.profileIconId }}.png" />
+            <h5>Id: {{ summoner.id }}</h5>
+            <h5>Name: {{ summoner.name }}</h5>
+            <h5>profileIconId: {{ summoner.profileIconId }}</h5>
+            <h5>revisionDate: {{ summoner.revisionDate }}</h5>
+            <h5>summonerLevel: {{ summoner.summonerLevel }}</h5>
+        </div>
+  </div>
+{% endblock %}
