@@ -12,6 +12,10 @@ class Summoner {
 		$this->summonerLevel = $summonerLevel;
 	}
 
+	public function getId() {
+		return $this->id;
+	}
+
 	public function serializeDataToArray() {
 		return [
 			"id" => $this->id,
