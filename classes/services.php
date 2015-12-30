@@ -36,7 +36,6 @@ class SummonerService extends Service {
 			$requestResult = file_get_contents("https://euw.api.pvp.net/api/lol/euw/v1.4/summoner/by-name/" . rawurlencode($name) . "?api_key=" . $this->apiKey, false);
 			$json = json_decode($requestResult, true);
 		} catch (ErrorException $e) {
-			echo $e;
 			return null;
 		}
 

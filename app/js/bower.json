@@ -15,7 +15,9 @@
   ],
   "dependencies": {
     "backbone": "~1.2.3",
+    "Chart.js": "~1.0.2",
     "handlebars": "~4.0.5",
-    "jquery": "~2.1.4"
+    "jquery": "~2.1.4",
+    "moment": "~2.10.6"
   }
 }
