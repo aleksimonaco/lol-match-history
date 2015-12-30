@@ -64,7 +64,7 @@ var SearchView = Backbone.View.extend({
 
 		var chart = new Chart(context).Line(chartData, {
 			responsive: true,
-			scaleStartValue : 0
+			scaleBeginAtZero: true
 		});
 	}
 });
