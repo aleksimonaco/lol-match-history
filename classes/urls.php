@@ -12,6 +12,9 @@ $app->post('/search', function () use ($app) {
     $formattedKeyword = trim(strtolower($data->search_keyword));
 
     $summoner = $app->summonerService->getSummonerByName($formattedKeyword);
+    $app->httpHelper->json($summoner, 200);
+    //$app->httpHelper->json(["summoner" => $summoner->serializeDataToArray()], 200);
+
     if ($summoner !== null) {
         $match = $app->matchService->getRecentMatchInfoBySummonerId($summoner->getId());
         $responseBody = [
@@ -19,14 +22,10 @@ $app->post('/search', function () use ($app) {
             "match" => $match
         ];
     } else {
-        $responseBody = ["error" => "SUMMONER_NOT_FOUND"];
+        $responseBody = ["error" => $summoner];
     }
 
-	$response = $app->response();
-    $response['Content-Type'] = 'application/json';
-    $response->body(json_encode($responseBody));
-
-    return $response;
+	$app->httpHelper->json($responseBody, 200);
 });
 
 ?>

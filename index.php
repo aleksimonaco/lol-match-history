@@ -23,10 +23,14 @@ require_once 'classes/urls.php';
 require_once 'classes/models.php';
 require_once 'classes/services.php';
 require_once 'classes/mappers.php';
+require_once 'classes/helpers.php';
 
-// Initalize required classes
-$app->summonerService = new SummonerService(new SummonerMapper(), getenv("API_KEY"));
-$app->matchService = new MatchService(new MatchMapper(), getenv("API_KEY"));
+// Initalize required service classes
+$app->summonerService = new SummonerService(new SummonerMapper());
+$app->matchService = new MatchService(new MatchMapper());
+
+//Initialize helpers
+$app->httpHelper = new HTTPHelper($app);
 
 $app->run();
 

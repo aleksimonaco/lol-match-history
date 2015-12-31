@@ -6,7 +6,14 @@
 */
 class Service {
 
-	public function __construct() {}
+	protected $mapper, $apiKey, $riotGamesAPI;
+
+	public function __construct($mapper) {
+		$this->mapper = $mapper;
+
+        $this->apiKey = getenv("API_KEY");
+        $this->riotGamesAPI = new RiotGamesAPI();
+	}
 }
 
 /**
@@ -15,12 +22,8 @@ class Service {
 */
 class SummonerService extends Service {
 
-	protected $mapper, $apiKey;
-
-	public function __construct(SummonerMapper $mapper, $apiKey) {
-        parent::__construct();
-        $this->mapper = $mapper; 
-        $this->apiKey = $apiKey;
+	public function __construct($mapper) {
+        parent::__construct($mapper);
     }
 
     /**
@@ -32,12 +35,8 @@ class SummonerService extends Service {
 	 */
 	function getSummonerByName($name) {
 
-		try {
-			$requestResult = file_get_contents("https://euw.api.pvp.net/api/lol/euw/v1.4/summoner/by-name/" . rawurlencode($name) . "?api_key=" . $this->apiKey, false);
-			$json = json_decode($requestResult, true);
-		} catch (ErrorException $e) {
-			return null;
-		}
+		$json = $this->riotGamesAPI->callAPI("https://euw.api.pvp.net/api/lol/euw/v1.4/summoner/by-name/" . rawurlencode($name) . "?api_key=" . $this->apiKey);
+		return $json;
 
 		$summoner = $this->mapper->mapToSingleModel(reset($json));
 		return $summoner;
@@ -49,12 +48,9 @@ class SummonerService extends Service {
 * 
 */
 class MatchService extends Service {
-	protected $mapper, $apiKey;
 
-	public function __construct(MatchMapper $mapper, $apiKey) {
-        parent::__construct();
-        $this->mapper = $mapper; 
-        $this->apiKey = $apiKey;
+	public function __construct($mapper) {
+        parent::__construct($mapper);
     }
 
     /**
@@ -72,7 +68,7 @@ class MatchService extends Service {
 
 			return $json;
 		} catch (ErrorException $e) {
-			return null;
+			return $http_response_header;
 		}
 	}
 }
