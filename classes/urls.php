@@ -11,12 +11,14 @@ $app->post('/search', function () use ($app) {
 	$data = json_decode($app->request->getBody());
     $formattedKeyword = trim(strtolower($data->search_keyword));
 
-    $summoner = $app->summonerService->getSummonerByName($formattedKeyword);
-    $app->httpHelper->json($summoner, 200);
-    //$app->httpHelper->json(["summoner" => $summoner->serializeDataToArray()], 200);
+    if ($formattedKeyword === "") {
+        $app->httpHelper->json(["error" => "EMPTY_SEARCH_KEYWORD"], 200);
+    }
 
-    if ($summoner !== null) {
-        $match = $app->matchService->getRecentMatchInfoBySummonerId($summoner->getId());
+    $summoner = $app->summonerService->getSummonerByName($formattedKeyword);
+
+    if (!array_key_exists("error", $summoner)) {
+        $match = $app->matchService->getRecentMatchesBySummonerId($summoner->getId());
         $responseBody = [
             "summoner" => $summoner->serializeDataToArray(),
             "match" => $match

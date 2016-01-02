@@ -27,16 +27,18 @@ class SummonerService extends Service {
     }
 
     /**
-	 * 
 	 * Get summoner data by name
 	 *
 	 * @param string $name summoner name
-	 * @return Summoner $summoner model for summoner data
+	 * @return Summoner $summoner Model for summoner data
 	 */
-	function getSummonerByName($name) {
+	public function getSummonerByName($name) {
 
 		$json = $this->riotGamesAPI->callAPI("https://euw.api.pvp.net/api/lol/euw/v1.4/summoner/by-name/" . rawurlencode($name) . "?api_key=" . $this->apiKey);
-		return $json;
+
+		if (array_key_exists("error", $json)) {
+			return $json;
+		}
 
 		$summoner = $this->mapper->mapToSingleModel(reset($json));
 		return $summoner;
@@ -58,18 +60,15 @@ class MatchService extends Service {
 	 * Get recent match info for summoner by id
 	 *
 	 * @param int $id summoner id
-	 * @return 
+	 * @return array $matches Details for recent matches
 	 */
-	function getRecentMatchInfoBySummonerId($id) {
+	public function getRecentMatchesBySummonerId($id) {
 
-		try {
-			$requestResult = file_get_contents("https://euw.api.pvp.net/api/lol/euw/v1.3/game/by-summoner/" . $id . "/recent?api_key=" . $this->apiKey, false);
-			$json = json_decode($requestResult, true);
+		$json = $this->riotGamesAPI->callAPI("https://euw.api.pvp.net/api/lol/euw/v1.3/game/by-summoner/" . $id . "/recent?api_key=" . $this->apiKey);
+		return $json;
 
-			return $json;
-		} catch (ErrorException $e) {
-			return $http_response_header;
-		}
+		$matches = $this->mapper->mapToMultipleModel($json["games"]);
+		return $matches;
 	}
 }
 

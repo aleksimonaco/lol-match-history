@@ -32,6 +32,9 @@ $app->matchService = new MatchService(new MatchMapper());
 //Initialize helpers
 $app->httpHelper = new HTTPHelper($app);
 
+//Start Session
+session_start();
+
 $app->run();
 
 ?>
