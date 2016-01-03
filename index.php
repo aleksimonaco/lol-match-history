@@ -18,7 +18,9 @@ $view->parserExtensions = array(
     new \Slim\Views\TwigExtension()
 );
 
+
 // Require once all the necessary php files
+require_once "classes/database.php";
 require_once 'classes/urls.php';
 require_once 'classes/models.php';
 require_once 'classes/services.php';
@@ -28,6 +30,7 @@ require_once 'classes/helpers.php';
 // Initalize required service classes
 $app->summonerService = new SummonerService(new SummonerMapper());
 $app->matchService = new MatchService(new MatchMapper());
+$app->databaseManager = new DatabaseManager();
 
 //Initialize helpers
 $app->httpHelper = new HTTPHelper($app);

@@ -19,6 +19,11 @@ $app->post('/search', function () use ($app) {
 
     if (!array_key_exists("error", $summoner)) {
         $match = $app->matchService->getRecentMatchesBySummonerId($summoner->getId());
+
+        foreach ($match["games"] as &$game) {
+            $game["championData"] = $app->databaseManager->getChampionByKey($game["championId"]);
+        }
+
         $responseBody = [
             "summoner" => $summoner->serializeDataToArray(),
             "match" => $match
@@ -29,5 +34,9 @@ $app->post('/search', function () use ($app) {
 
 	$app->httpHelper->json($responseBody, 200);
 });
+
+/*$app->get('/db_test/', function() use ($app) {
+    print_r($app->databaseManager->getChampionByKey("266"));
+});*/
 
 ?>

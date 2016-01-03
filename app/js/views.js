@@ -1,3 +1,4 @@
+/* View for displaying recent match results */
 var SearchView = Backbone.View.extend({
 	el: "#content",
 	events: {
@@ -11,6 +12,7 @@ var SearchView = Backbone.View.extend({
 		this.$el.html(this.template(data));
 		return this;
 	},
+	// When user clicks search button
 	search: function(event) {
 		event.preventDefault();
 		var self = this;
@@ -23,7 +25,7 @@ var SearchView = Backbone.View.extend({
 			data: JSON.stringify({search_keyword: searchKeyword}),
 			contentType: "application/json; charset=utf-8",
 			success: function(data) {
-				// Add search keyword
+				// Remember search keyword
 				_.extend(data, {"search_keyword": searchKeyword});
 
 				self.render(data);
@@ -32,17 +34,21 @@ var SearchView = Backbone.View.extend({
 				}
 			},
 			error: function(errorMessage) {
-
+				self.render({"error": errorMessage});
 			}
 		});
 	},
+	// Render chart for total kills for recent matches with data
 	renderTotalKillsChart: function(data) {
 		var context = this.$el.find("#totalKills").get(0).getContext("2d");
 		var dates = [], totalKills = [];
 
 		_.each(data["match"]["games"], function(game) {
-			dates.unshift(moment(game["createDate"]).format("DD/MM/YYYY HH:mm"));
-			totalKills.unshift(game["stats"]["championsKilled"]);
+			var championsKilled = game["stats"]["championsKilled"],
+				createDate = game["createDate"];
+
+			dates.unshift(moment(createDate).format("DD/MM/YYYY HH:mm"));
+			totalKills.unshift(championsKilled === undefined ? 0 : championsKilled);
 		});
 
 		var chartData = {
@@ -51,12 +57,12 @@ var SearchView = Backbone.View.extend({
 				{
 					label: "Your total kills in the past 10 matches",
 					labelColor: "white",
-					fillColor: "rgba(220,220,220,0.2)",
-					strokeColor: "rgba(220,220,220,1)",
-					pointColor: "rgba(220,220,220,1)",
+					fillColor: "rgba(220, 220, 220, 0.2)",
+					strokeColor: "rgba(220, 220, 220, 1)",
+					pointColor: "rgba(220, 220, 220, 1)",
 					pointStrokeColor: "#fff",
 					pointHighlightFill: "#fff",
-					pointHighlightStroke: "rgba(220,220,220,1)",
+					pointHighlightStroke: "rgba(220, 220, 220, 1)",
 					data: totalKills
 				}
 			]

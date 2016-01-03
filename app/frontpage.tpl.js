@@ -29,13 +29,13 @@ templates['frontpage'] = template({"1":function(container,depth0,helpers,partial
     + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},((stack1 = (depth0 != null ? depth0.match : depth0)) != null ? stack1.games : stack1),{"name":"each","hash":{},"fn":container.program(6, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "            <div class=\"col-xs-12 text-center\">\r\n                <h1>Total kills in last 10 matches</h1>\r\n                <canvas id=\"totalKills\" width=\"1200\" height=\"400\"></canvas>\r\n            </div>\r\n        </div>\r\n";
 },"6":function(container,depth0,helpers,partials,data) {
-    var alias1=container.lambda, alias2=container.escapeExpression;
+    var stack1, alias1=container.lambda, alias2=container.escapeExpression;
 
-  return "                <div class=\"col-xs-12 text-center\">\r\n                "
-    + alias2(alias1((depth0 != null ? depth0.championId : depth0), depth0))
-    + "\r\n                <img alt=\"Champion icon\" src=\"http://ddragon.leagueoflegends.com/cdn/5.24.2/img/profileicon/"
-    + alias2(alias1((depth0 != null ? depth0.championId : depth0), depth0))
-    + ".png\" style=\"float: left;\" />\r\n                    <h2>Hello</h2>\r\n                </div>\r\n";
+  return "                <div class=\"col-xs-12 col-md-6 col-md-offset-3 text-center\">\r\n                    <div class=\"panel panel-default\">\r\n                        <div class=\"panel-body\">\r\n                            <img alt=\"Champion icon\" src=\"http://ddragon.leagueoflegends.com/cdn/"
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.championData : depth0)) != null ? stack1.version : stack1), depth0))
+    + "/img/champion/"
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.championData : depth0)) != null ? stack1.image_full : stack1), depth0))
+    + "\" style=\"float: left;\" />\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
