@@ -1,38 +1,12 @@
 <h1 class="col-xs-12 col-sm-10 col-sm-offset-1 page-header">Welcome to LolPerformance! <small>Check how you've performed lately</small></h1>
-    <div class="row col-xs-12 col-sm-10 col-sm-offset-1">
-        <h2 class="col-xs-12">Type in your summoner name and hit search!</h2>
-        <form id="search-form" class="col-xs-12 col-sm-4"action="{{ DOMAIN }}/search" method="POST">
-            <input id="search-keyword" class="form-control" name="search_keyword" type="text" value="{{ search_keyword }}"/>
-            <input class="form-control" name="submit" type="submit" value="Search" />
-            {{#if error}}
-                <div class="alert alert-danger">{{ error }}</div>
-            {{/if}}
-        </form>
-        <div class="col-xs-12 col-sm-6">
-            {{#if summoner}}
-                <img src="http://ddragon.leagueoflegends.com/cdn/5.24.2/img/profileicon/{{ summoner.profileIconId }}.png" />
-                <h5>Id: {{ summoner.id }}</h5>
-                <h5>Name: {{ summoner.name }}</h5>
-                <h5>profileIconId: {{ summoner.profileIconId }}</h5>
-                <h5>revisionDate: {{ summoner.revisionDate }}</h5>
-                <h5>summonerLevel: {{ summoner.summonerLevel }}</h5>
-            {{/if}}
-        </div>
-    </div>
-    {{#if match}}
-        <div class="row">
-            {{#each match.games}}
-                <div class="col-xs-12 col-md-6 col-md-offset-3 text-center">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <img alt="Champion icon" src="http://ddragon.leagueoflegends.com/cdn/{{ this.championData.version }}/img/champion/{{ this.championData.image_full }}" style="float: left;" />
-                        </div>
-                    </div>
-                </div>
-            {{/each}}
-            <div class="col-xs-12 text-center">
-                <h1>Total kills in last 10 matches</h1>
-                <canvas id="totalKills" width="1200" height="400"></canvas>
-            </div>
-        </div>
-    {{/if}}
+<div class="row col-xs-12 col-sm-10 col-sm-offset-1">
+    <h2 class="col-xs-12">Type in your summoner name and hit search!</h2>
+    <form id="search-form" class="col-xs-12 col-sm-4"action="{{ DOMAIN }}/search" method="POST">
+        <input id="search-keyword" class="form-control" name="search_keyword" type="text" value="{{ search_keyword }}"/>
+        <input id="search-button" class="form-control" name="submit" type="submit" value="Search" />
+        {{#if error}}
+            <div class="alert alert-danger">{{ error }}</div>
+        {{/if}}
+    </form>
+</div>
+    
