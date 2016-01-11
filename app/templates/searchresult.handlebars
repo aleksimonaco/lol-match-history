@@ -10,18 +10,8 @@
 </div> -->
 
 <div class="row">
-{{#if loading}}
-    <div class="col-xs-12 col-md-6 col-md-offset-3 text-center">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <h3>Fetching data...</h3>
-                <i class="fa fa-cog fa-spin fa-4x"></i>
-            </div>
-        </div>
-    </div>
-{{/if}}
-{{#if match}}
-    {{#each match.games}}
+{{#if matches}}
+    {{#each matches}}
         <div class="col-xs-12 col-md-6 col-md-offset-3 text-center">
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -40,9 +30,18 @@
             </div>
         </div>
     {{/each}}
-    <div class="col-xs-12 text-center">
+    <div class="col-xs-12 col-md-6 col-md-offset-3 text-center">
         <h1>Total kills in last 10 matches</h1>
-        <canvas id="totalKills" width="1200" height="400"></canvas>
+        <canvas id="totalKills"></canvas>
+    </div>
+{{else}}
+    <div class="col-xs-12 col-md-6 col-md-offset-3 text-center">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h3>Fetching data...</h3>
+                <i class="fa fa-cog fa-spin fa-4x"></i>
+            </div>
+        </div>
     </div>
 {{/if}}
 </div>

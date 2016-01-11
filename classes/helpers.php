@@ -24,18 +24,18 @@ class RiotGamesAPI {
      */
 	public function callAPI($url) {
 
-		try {
-            // Check request count from session
-			$this->rateLimiter->limit();
+        // Check request count from session
+		$this->rateLimiter->limit();
 
-			$requestResult = file_get_contents($url, false);
-			$json = json_decode($requestResult, true);
+        try {
+            $result = file_get_contents($url);
+        } catch (ErrorException $e) {
+            return ["error" => "true"];
+        }
+		
+		$json = json_decode($result, true);
 
-			return $json;
-		} catch (ErrorException $e) {
-			return ["error" => $e->getMessage()];
-		}
-
+		return $json;
 	}
 }
 

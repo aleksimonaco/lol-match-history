@@ -12,7 +12,7 @@ $app->post('/search', function () use ($app) {
     $formattedKeyword = trim(strtolower($data->search_keyword));
 
     if ($formattedKeyword === "") {
-        $app->httpHelper->json(["error" => "EMPTY_SEARCH_KEYWORD"], 200);
+        $app->httpHelper->json(["error" => "EMPTY_SEARCH_KEYWORD"], 404);
     }
 
     $summoner = $app->summonerService->getSummonerByName($formattedKeyword);
@@ -25,18 +25,13 @@ $app->post('/search', function () use ($app) {
         }
 
         $responseBody = [
-            "summoner" => $summoner->serializeDataToArray(),
             "match" => $match
         ];
     } else {
-        $responseBody = ["error" => $summoner];
+        $app->httpHelper->json(["error" => "SUMMONER_NOT_FOUND"], 404);
     }
 
 	$app->httpHelper->json($responseBody, 200);
 });
-
-/*$app->get('/db_test/', function() use ($app) {
-    print_r($app->databaseManager->getChampionByKey("266"));
-});*/
 
 ?>

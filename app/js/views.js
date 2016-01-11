@@ -15,51 +15,36 @@ var SearchView = Backbone.View.extend({
 	// When user clicks search button
 	search: function(event) {
 		event.preventDefault();
+
 		this.$el.find('#search-button').attr("disabled", true);
-		var searchResultView = new SearchResultView({ model: { "loading": "true" }});
+		var searchResultView = new SearchResultView();
 
 		var self = this;
-
 		var searchKeyword = this.$el.find("#search-keyword").val();
 
-		$.ajax({
-			url: "search",
+		var matches = new Matches();
+		matches.fetch({
 			type: "POST",
 			data: JSON.stringify({search_keyword: searchKeyword}),
 			contentType: "application/json; charset=utf-8",
-			success: function(data) {
-				if (!data["error"]) {
-					// Clear error if any
-					self.render({"search_keyword": searchKeyword});
+			success: function(collection, response, options) {
+				// Clear error if any
+				self.render({"search_keyword": searchKeyword});
 
-					// Remember search keyword
-					_.extend(data, {"search_keyword": searchKeyword});
-					
-					_.each(data["match"]["games"], function(game) {
-						game["since"] = moment(game["createDate"]).fromNow();
-						game["stats"]["championsKilled"] = game["stats"]["championsKilled"] ? game["stats"]["championsKilled"] : 0;
-						game["kda"] = ((game["stats"]["championsKilled"] + game["stats"]["assists"]) / (game["stats"]["numDeaths"])).toFixed(2);
-					});
-
-					//TO-DO: Add model for matches
-					searchResultView.model = data;
-					searchResultView.render();
-
-				} else {
-					self.render(data);
-					searchResultView.model = null;
-					searchResultView.render();
-				}
+				searchResultView.collection = collection;
+				searchResultView.render();
+				searchResultView.renderTotalKillsChart();
 			},
-			error: function(errorMessage) {
-				self.render({"error": errorMessage});
+			error: function(collection, response) {
+				// Render error and empty result view content
+				self.render(response.responseJSON);
+				searchResultView.$el.html("");
 			},
 			complete: function(data) {
 				self.$el.find('#search-button').attr("disabled", false);
 			}
 		});
-	},
-	
+	}
 });
 
 var SearchResultView = Backbone.View.extend({
@@ -69,47 +54,45 @@ var SearchResultView = Backbone.View.extend({
 		this.render();
 	},
 	render: function() {
-		//TO-DO: Add model for matches
-		this.$el.html(this.template(this.model));
-		this.renderTotalKillsChart();
+		var data = this.collection ? {"matches": this.collection.toJSON()} : {};
+		this.$el.html(this.template(data));
 		return this;
 	},
 	// Render chart for total kills for recent matches with data
 	renderTotalKillsChart: function() {
-		if ('summoner' in this.model && 'match' in this.model) {
-			var data = this.model;
-			var context = this.$el.find("#totalKills").get(0).getContext("2d");
-			var dates = [], totalKills = [];
+		var matches = this.collection.toJSON();
+		var context = this.$el.find("#totalKills").get(0).getContext("2d");
+		var dates = [], totalKills = [];
 
-			_.each(data["match"]["games"], function(game) {
-				var championsKilled = game["stats"]["championsKilled"],
-					createDate = game["createDate"];
+		_.each(matches, function(match) {
+			var championsKilled = match["stats"]["championsKilled"],
+				createDate = match["createDate"];
 
-				dates.unshift(moment(createDate).format("DD/MM HH:mm"));
-				totalKills.unshift(championsKilled === undefined ? 0 : championsKilled);
-			});
+			dates.unshift(moment(createDate).format("DD/MM HH:mm"));
+			totalKills.unshift(championsKilled);
+		});
 
-			var chartData = {
-				labels: dates,
-				datasets: [
-					{
-						label: "Your total kills in the past 10 matches",
-						labelColor: "white",
-						fillColor: "rgba(220, 220, 220, 0.2)",
-						strokeColor: "rgba(220, 220, 220, 1)",
-						pointColor: "rgba(220, 220, 220, 1)",
-						pointStrokeColor: "#fff",
-						pointHighlightFill: "#fff",
-						pointHighlightStroke: "rgba(220, 220, 220, 1)",
-						data: totalKills
-					}
-				]
-			};
+		var chartData = {
+			labels: dates,
+			datasets: [
+				{
+					label: "Your total kills in the past 10 matches",
+					labelColor: "white",
+					fillColor: "rgba(220, 220, 220, 0.2)",
+					strokeColor: "rgba(220, 220, 220, 1)",
+					pointColor: "rgba(220, 220, 220, 1)",
+					pointStrokeColor: "#fff",
+					pointHighlightFill: "#fff",
+					pointHighlightStroke: "rgba(220, 220, 220, 1)",
+					data: totalKills
+				}
+			]
+		};
 
-			var chart = new Chart(context).Line(chartData, {
-				responsive: true,
-				scaleBeginAtZero: true
-			});
-		}
+		var chart = new Chart(context).Line(chartData, {
+			responsive: true,
+			scaleBeginAtZero: true
+		});
 	}
 });
+ 

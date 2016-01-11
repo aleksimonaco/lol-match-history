@@ -34,13 +34,13 @@ class SummonerService extends Service {
 	 */
 	public function getSummonerByName($name) {
 
-		$json = $this->riotGamesAPI->callAPI("https://euw.api.pvp.net/api/lol/euw/v1.4/summoner/by-name/" . rawurlencode($name) . "?api_key=" . $this->apiKey);
+		$result = $this->riotGamesAPI->callAPI("https://euw.api.pvp.net/api/lol/euw/v1.4/summoner/by-name/" . rawurlencode($name) . "?api_key=" . $this->apiKey);
 
-		if (array_key_exists("error", $json)) {
-			return $json;
+		if (array_key_exists("error", $result)) {
+			return $result;
 		}
 
-		$summoner = $this->mapper->mapToSingleModel(reset($json));
+		$summoner = $this->mapper->mapToSingleModel(reset($result));
 		return $summoner;
 	}
 }
