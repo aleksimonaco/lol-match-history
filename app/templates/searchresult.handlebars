@@ -16,14 +16,18 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="col-xs-4">
-                        <img class="match-champion-icon" alt="Champion icon" src="http://ddragon.leagueoflegends.com/cdn/{{ this.championData.version }}/img/champion/{{ this.championData.image_full }}" />
+                        {{#if this.championData.image_full }}
+                            <img class="match-champion-icon" alt="Champion icon" src="http://ddragon.leagueoflegends.com/cdn/{{ this.championData.version }}/img/champion/{{ this.championData.image_full }}" />
+                        {{else}}
+                            <div class="match-champion-icon champion-icon-unknown"><i class="fa fa-question fa-3x"></i></div>
+                        {{/if}}
                     </div>
                     <div class="col-xs-4">
                         <h4>{{ this.gameMode }}</h4>
                         <h2>{{ this.since }}</h2>
                     </div>
                     <div class="col-xs-4">
-                        <h4>{{#if this.stats.championsKilled }} {{ this.stats.championsKilled }} {{else}} 0 {{/if}} / {{ this.stats.numDeaths }} / {{ this.stats.assists }}</h4>
+                        <h4>{{ this.stats.championsKilled }} / {{ this.stats.numDeaths }} / {{ this.stats.assists }}</h4>
                         <h2>KDA {{ this.kda }}</h2>
                     </div>
                 </div>

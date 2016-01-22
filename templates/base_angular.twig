@@ -1,0 +1,98 @@
+<!doctype html>
+
+<html lang="en" ng-app="lolApp">
+<head>
+  {% block head %}
+  <meta charset="utf-8">
+
+  <title>Lolperformance</title>
+  <meta name="description" content="Lolperformance">
+  <meta name="author" content="Aleksi Monaco">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+      <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+      <![endif]-->
+    <link rel="stylesheet" href="{{ DOMAIN }}/templates/styles/styles.css">
+    {% endblock %}
+</head>
+
+<body>
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                    <span>LolPerformance</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+    
+    <div id="content">
+      <div id="search" ng-controller="searchController">
+        <h1 class="col-xs-12 col-sm-10 col-sm-offset-1 page-header">Welcome to LolPerformance! <small>Check how you've performed lately</small></h1>
+        <div class="row col-xs-12 col-sm-10 col-sm-offset-1">
+            <h2 class="col-xs-12">Type in your summoner name and hit search!</h2>
+            <form id="search-form" class="col-xs-12 col-sm-4" novalidate ng-submit="search()">
+                <input id="search-keyword" class="form-control" name="search_keyword" type="text" ng-model="searchKeyword"/>
+                <input id="search-button" class="form-control" name="submit" type="submit" value="Search" />
+                <div ng-show="/*errorMessage !== ''*/" class="alert alert-danger">// errorMessage //</div>
+            </form>
+        </div>
+        <div id="search-result">
+          <div class="col-xs-12 col-md-6 col-md-offset-3 text-center" ng-repeat="match in matches">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-xs-4">
+                            <img class="match-champion-icon" alt="Champion icon" src="http://ddragon.leagueoflegends.com/cdn//* match.championData.version *//img/champion//* match.championData.image_full */" />
+                            <!-- <div class="match-champion-icon champion-icon-unknown"><i class="fa fa-question fa-3x"></i></div> -->
+                    </div>
+                    <div class="col-xs-4">
+                        <h4>/* match.gameMode */</h4>
+                        <h2>/* match.since */</h2>
+                    </div>
+                    <div class="col-xs-4">
+                        <h4>/* match.stats.championsKilled */ / /* match.stats.numDeaths */ / /* match.stats.assists */</h4>
+                        <h2>KDA /* match.kda */</h2>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="loading-spiner-holder" data-loading>
+        <div class="loading-spiner">
+          <div class="col-xs-12 col-md-6 col-md-offset-3 text-center">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>Fetching data...</h3>
+                    <i class="fa fa-cog fa-spin fa-4x"></i>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="footer">{% block footer %}{% endblock %}</div>
+
+  <!-- JS Dependencies -->
+  <script src="{{ DOMAIN }}/app/js/bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="{{ DOMAIN }}/app/js/bower_components/angular/angular.min.js"></script>
+  <script src="{{ DOMAIN }}/app/js/bower_components/moment/moment.js"></script>
+  <script src="{{ DOMAIN }}/app/js/bower_components/Chart.js/Chart.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+  <!-- App JS -->
+  <script src="{{ DOMAIN }}/app/js/angular/app.js"></script>
+</body>
+</html>

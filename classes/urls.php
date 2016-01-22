@@ -1,7 +1,7 @@
 <?php
 
 $app->get('/', function () use ($app) {
-	$app->render("base.twig", [
+	$app->render("base_angular.twig", [
 		"DOMAIN" => DOMAIN
 	]);
 });
@@ -24,9 +24,7 @@ $app->post('/search', function () use ($app) {
             $game["championData"] = $app->databaseManager->getChampionByKey($game["championId"]);
         }
 
-        $responseBody = [
-            "match" => $match
-        ];
+        $responseBody = ["match" => $match];
     } else {
         $app->httpHelper->json(["error" => "SUMMONER_NOT_FOUND"], 404);
     }

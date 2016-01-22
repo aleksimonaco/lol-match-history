@@ -1,13 +1,21 @@
-html {
-	width: 100%;
-	height: 100%;
-}
-
-body { 
+html, body {
 	width: 100%;
 	height: 100%;
 }
 
 .match-champion-icon {
 	border-radius: 50%;
+}
+
+.champion-icon-unknown {
+	height: 120px;
+	width: 120px;
+	background-color: #A19898;
+	margin: 0 auto;
+	line-height: 120px;
+}
+
+.champion-icon-unknown i {
+	color: white;
+	vertical-align: middle;
 }
