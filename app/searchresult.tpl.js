@@ -24,16 +24,14 @@ templates['searchresult'] = template({"1":function(container,depth0,helpers,part
 },"4":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression;
 
-  return "        <div class=\"col-xs-12 col-md-6 col-md-offset-3 text-center\">\r\n            <div class=\"panel panel-default\">\r\n                <div class=\"panel-body\">\r\n                    <div class=\"col-xs-4\">\r\n                        <img class=\"match-champion-icon\" alt=\"Champion icon\" src=\"http://ddragon.leagueoflegends.com/cdn/"
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.championData : depth0)) != null ? stack1.version : stack1), depth0))
-    + "/img/champion/"
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.championData : depth0)) != null ? stack1.image_full : stack1), depth0))
-    + "\" />\r\n                    </div>\r\n                    <div class=\"col-xs-4\">\r\n                        <h4>"
+  return "        <div class=\"col-xs-12 col-md-6 col-md-offset-3 text-center\">\r\n            <div class=\"panel panel-default\">\r\n                <div class=\"panel-body\">\r\n                    <div class=\"col-xs-4\">\r\n"
+    + ((stack1 = helpers["if"].call(depth0 != null ? depth0 : {},((stack1 = (depth0 != null ? depth0.championData : depth0)) != null ? stack1.image_full : stack1),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.program(7, data, 0),"data":data})) != null ? stack1 : "")
+    + "                    </div>\r\n                    <div class=\"col-xs-4\">\r\n                        <h4>"
     + alias2(alias1((depth0 != null ? depth0.gameMode : depth0), depth0))
     + "</h4>\r\n                        <h2>"
     + alias2(alias1((depth0 != null ? depth0.since : depth0), depth0))
     + "</h2>\r\n                    </div>\r\n                    <div class=\"col-xs-4\">\r\n                        <h4>"
-    + ((stack1 = helpers["if"].call(depth0 != null ? depth0 : {},((stack1 = (depth0 != null ? depth0.stats : depth0)) != null ? stack1.championsKilled : stack1),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.program(7, data, 0),"data":data})) != null ? stack1 : "")
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.stats : depth0)) != null ? stack1.championsKilled : stack1), depth0))
     + " / "
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.stats : depth0)) != null ? stack1.numDeaths : stack1), depth0))
     + " / "
@@ -42,13 +40,15 @@ templates['searchresult'] = template({"1":function(container,depth0,helpers,part
     + alias2(alias1((depth0 != null ? depth0.kda : depth0), depth0))
     + "</h2>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n";
 },"5":function(container,depth0,helpers,partials,data) {
-    var stack1;
+    var stack1, alias1=container.lambda, alias2=container.escapeExpression;
 
-  return " "
-    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.stats : depth0)) != null ? stack1.championsKilled : stack1), depth0))
-    + " ";
+  return "                            <img class=\"match-champion-icon\" alt=\"Champion icon\" src=\"http://ddragon.leagueoflegends.com/cdn/"
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.championData : depth0)) != null ? stack1.version : stack1), depth0))
+    + "/img/champion/"
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.championData : depth0)) != null ? stack1.image_full : stack1), depth0))
+    + "\" />\r\n";
 },"7":function(container,depth0,helpers,partials,data) {
-    return " 0 ";
+    return "                            <div class=\"match-champion-icon champion-icon-unknown\"><i class=\"fa fa-question fa-3x\"></i></div>\r\n";
 },"9":function(container,depth0,helpers,partials,data) {
     return "    <div class=\"col-xs-12 col-md-6 col-md-offset-3 text-center\">\r\n        <div class=\"panel panel-default\">\r\n            <div class=\"panel-body\">\r\n                <h3>Fetching data...</h3>\r\n                <i class=\"fa fa-cog fa-spin fa-4x\"></i>\r\n            </div>\r\n        </div>\r\n    </div>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {

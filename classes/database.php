@@ -17,7 +17,7 @@ class DatabaseManager {
 	    . "dbname=" . ltrim($dbopts["path"],'/') . ";"
 	    . "user=" . $dbopts["user"] . ";"
 	    . "port=" . $dbopts["port"] . ";"
-	    . "password=" . $dbopts["pass"];  
+	    . "password=" . $dbopts["pass"];
 
 		$this->pdo = new PDO($dsn);
 	}
@@ -50,6 +50,8 @@ class DatabaseManager {
 		}
 	}
 
+	/* Utility functions for converting champion json data to database
+
 	private function getChampionJSON() {
 		$json = json_decode(file_get_contents("http://ddragon.leagueoflegends.com/cdn/5.24.2/data/en_US/champion.json"), true);
 
@@ -69,7 +71,7 @@ class DatabaseManager {
 					stats_armor, stats_armorperlevel, stats_spellblock, stats_spellblockperlevel,
 					stats_attackrange, stats_hpregen, stats_hpregenperlevel, stats_mpregen,
 					stats_mpregenperlevel, stats_crit, stats_critperlevel,
-					stats_attackdamage, stats_attackdamageperlevel, stats_attackspeedoffset, stats_attackspeedperlevel) 
+					stats_attackdamage, stats_attackdamageperlevel, stats_attackspeedoffset, stats_attackspeedperlevel)
 					VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
 				$sql->bindParam(1, $champion["id"]);
@@ -122,6 +124,7 @@ class DatabaseManager {
 			}
 		}
 	}
+	*/
 
 }
 
