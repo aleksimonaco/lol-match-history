@@ -5,7 +5,7 @@ var lolApp = angular.module('lolApp', []);
     $interpolateProvider.endSymbol('*/');
  });
 
-lolApp.controller("searchController", function($scope, $http) {
+lolApp.controller("searchController", function($scope, apiService) {
 
 	$scope.searchKeyword = "";
 	$scope.errorMessage = "";
@@ -20,17 +20,42 @@ lolApp.controller("searchController", function($scope, $http) {
 
 		$scope.errorMessage = "";
 
-		$http({
-		  method: 'POST',
-		  url: '/lol-match-history/search',
-		  data: {"search_keyword": $scope.searchKeyword}
-		}).then(function successCallback(response) {
-		    $scope.matches = response.data.match.games;
-		}, function errorCallback(response) {
-			console.log(response);
-		});
+    apiService.getRecentMatches($scope.searchKeyword)
+      .then(function(data) {
+        if (data !== undefined) {
+          $scope.matches = data.match.games;
+        }
+      });
 	}
 
+  function generateTotalKillGraph() {
+    // TO-DO
+  }
+
+});
+
+lolApp.service('apiService', function($http) {
+  return ({
+    getRecentMatches: getRecentMatches
+  });
+
+  function getRecentMatches(summonerName) {
+    var request = $http({
+		  method: 'POST',
+		  url: '/lol-match-history/search',
+		  data: {"search_keyword": summonerName}
+		});
+
+    function handleSuccess(response) {
+      return(response.data);
+    }
+
+    function handleError(response) {
+        console.log(response);
+    }
+
+    return(request.then(handleSuccess, handleError));
+  }
 });
 
 lolApp.directive('loading', ['$http', function ($http) {
