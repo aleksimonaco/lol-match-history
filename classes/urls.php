@@ -1,7 +1,7 @@
 <?php
 
 $app->get('/', function () use ($app) {
-	$app->render("base_angular.twig", [
+	$app->render("base.twig", [
 		"DOMAIN" => DOMAIN
 	]);
 });

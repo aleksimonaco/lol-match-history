@@ -1,9 +1,13 @@
-var lolApp = angular.module('lolApp', []);
+var lolApp = angular.module('lolApp', ['angular-loading-bar']);
 
  lolApp.config(function($interpolateProvider) {
     $interpolateProvider.startSymbol('/*');
     $interpolateProvider.endSymbol('*/');
  });
+
+ lolApp.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+    cfpLoadingBarProvider.includeSpinner = false;
+  }])
 
 lolApp.controller("searchController", function($scope, apiService) {
 
@@ -57,23 +61,3 @@ lolApp.service('apiService', function($http) {
     return(request.then(handleSuccess, handleError));
   }
 });
-
-lolApp.directive('loading', ['$http', function ($http) {
-    return {
-        restrict: 'A',
-        link: function (scope, element, attributes) {
-            scope.isLoading = function () {
-                return $http.pendingRequests.length > 0;
-            };
-
-            scope.$watch(scope.isLoading, function (v) {
-                if (v) {
-                    element.show();
-                } else {
-                    element.hide();
-                }
-            });
-        }
-    };
-}
-]);

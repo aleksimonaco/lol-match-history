@@ -1,7 +1,7 @@
 {
   "name": "js",
   "version": "0.0.1",
-  "homepage": "https://github.com/aleksimonaco/steam-web-api-test",
+  "homepage": "https://github.com/aleksimonaco/lol-match-history",
   "authors": [
     "Aleksi Monaco <aleksi.monaco@hotmail.com>"
   ],
@@ -14,11 +14,10 @@
     "tests"
   ],
   "dependencies": {
-    "backbone": "~1.2.3",
-    "Chart.js": "~1.0.2",
-    "handlebars": "~4.0.5",
+    "angular": "~1.4.8",
     "jquery": "~2.1.4",
     "moment": "~2.10.6",
-    "angular": "~1.4.8"
+    "Chart.js": "~1.0.2",
+    "angular-loading-bar": "~0.8.0"
   }
 }
