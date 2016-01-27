@@ -1,8 +1,8 @@
-lolApp.controller("searchController", function($scope, apiService) {
+lolApp.controller("searchController", function($scope, apiService, recentMatchesService) {
 
 	$scope.searchKeyword = "";
 	$scope.errorMessage = "";
-	$scope.matches = [];
+	$scope.matches = recentMatchesService.getMatches();
 
 	$scope.search = function() {
 
@@ -16,13 +16,18 @@ lolApp.controller("searchController", function($scope, apiService) {
     apiService.getRecentMatches($scope.searchKeyword)
       .then(function(data) {
         if (data !== undefined) {
-          $scope.matches = data.match.games;
+					recentMatchesService.setMatches(data.match.games);
         }
       });
 	}
 
-  function generateTotalKillGraph() {
-    // TO-DO
-  }
+	// Watch for changes in recent matches data
+	$scope.$watch(function() {
+		return recentMatchesService.getMatches();
+	}, function(newValue, oldValue) {
+  	if (newValue !== oldValue) {
+			$scope.matches = newValue;
+		}
+	}, true);
 
 });
