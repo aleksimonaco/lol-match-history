@@ -1,4 +1,4 @@
-var lolApp = angular.module('lolApp', ['angular-loading-bar']);
+var lolApp = angular.module('lolApp', ['angular-loading-bar', 'ngAnimate']);
 
 lolApp.config(function($interpolateProvider) {
   $interpolateProvider.startSymbol('/*');
