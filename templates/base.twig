@@ -39,10 +39,12 @@
         <h1 class="col-xs-12 col-sm-10 col-sm-offset-1 page-header">Welcome to LolPerformance! <small>Check how you've performed lately</small></h1>
         <div class="row col-xs-12 col-sm-10 col-sm-offset-1">
             <h2 class="col-xs-12">Type in your summoner name and hit search!</h2>
-            <form id="search-form" class="col-xs-12 col-sm-4" novalidate ng-submit="search()">
-                <input id="search-keyword" class="form-control" name="search_keyword" type="text" ng-model="searchKeyword"/>
+            <form id="search-form" name="searchForm" class="col-xs-12 col-sm-4" novalidate ng-submit="searchForm.$valid && search()">
+                <input id="search-keyword" class="form-control" name="search_keyword" type="text" ng-model="searchKeyword" required/>
                 <input id="search-button" class="form-control" name="submit" type="submit" value="Search" />
-                <div ng-if="errorMessage !== ''" class="alert alert-danger">/* errorMessage */</div>
+                <div ng-show="searchForm.$submitted && searchForm.search_keyword.$touched">
+                  <div ng-show="searchForm.search_keyword.$error.required" class="alert alert-danger">Give a summoner name</div>
+                </div>
             </form>
         </div>
         <div id="search-result">
