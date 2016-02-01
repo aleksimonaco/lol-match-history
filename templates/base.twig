@@ -24,22 +24,55 @@
 
 <body>
 
+    <!--
+
+    Navbar
+
+    -->
+
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">
-                    <span>LolPerformance</span>
+                    <span>lolperformance</span>
                 </a>
             </div>
         </div>
     </nav>
 
+    
     <div id="content">
-      <div id="search" ng-controller="searchController">
-        <h1 class="col-xs-12 col-sm-10 col-sm-offset-1 page-header">Welcome to LolPerformance! <small>Check how you've performed lately</small></h1>
-        <div class="row col-xs-12 col-sm-10 col-sm-offset-1">
-            <h2 class="col-xs-12">Type in your summoner name and hit search!</h2>
-            <form id="search-form" name="searchForm" class="col-xs-12 col-sm-4" novalidate ng-submit="searchForm.$valid && search()">
+
+      <!--
+
+      Dismissable welcome text
+
+      -->
+
+      <div class="welcome-alert alert alert-info alert-dismissable text-center">
+        <strong>Welcome to lolperformance!</strong> Check how you've performed lately using the search form below
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <!--
+
+      Search content wrapper
+
+      -->
+
+      <div id="search" class="row" ng-controller="searchController">
+        
+        <!--
+
+        Search input
+
+        -->
+        
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+            <h3 class="col-xs-12 text-center">Type in your summoner name and hit search!</h3>
+            <form id="search-form" name="searchForm" class="col-xs-12 col-sm-6 col-sm-offset-3" novalidate ng-submit="searchForm.$valid && search()">
                 <input id="search-keyword" class="form-control" name="search_keyword" type="text" ng-model="searchKeyword" required/>
                 <input id="search-button" class="form-control" name="submit" type="submit" value="Search" />
                 <div ng-show="searchForm.$submitted && searchForm.search_keyword.$touched">
@@ -47,8 +80,15 @@
                 </div>
             </form>
         </div>
-        <div id="search-result">
-          <div class="matches col-xs-12 col-md-6 col-md-offset-3 text-center" ng-repeat="match in matches">
+
+        <!--
+
+        Search results
+
+        -->
+
+        <div id="search-result" class="col-xs-12">
+          <div class="matches col-xs-12 col-md-8 col-md-offset-2 text-center" ng-repeat="match in matches">
             <recent-match match=match></recent-match>
           </div>
         </div>

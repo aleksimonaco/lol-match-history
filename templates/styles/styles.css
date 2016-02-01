@@ -3,6 +3,40 @@ html, body {
 	height: 100%;
 }
 
+.navbar {
+	margin-bottom: 0px;
+}
+
+.navbar-header {
+	width: 100%;
+}
+
+.navbar-brand {
+	width: 100%;
+	font-size: 25px;
+    letter-spacing: 1.5px;
+    text-align: center;
+}
+
+.welcome-alert {
+	margin-bottom: 0px;
+}
+
+#search {
+	margin-top: 20px;
+}
+
+#search-form {
+	margin-top: 12px;
+	margin-bottom: 20px;
+}
+
+#search-result {
+	margin-top: 15px;
+    border-top: 1px solid #D6D4D4;
+    padding-top: 27px;
+}
+
 .match-champion-icon {
 	border-radius: 50%;
 }
