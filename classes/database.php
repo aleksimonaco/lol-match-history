@@ -21,6 +21,21 @@ class DatabaseManager {
 
 		$this->pdo = new PDO($dsn);
 	}
+}
+
+/**
+ * ChampionDAO
+ *
+ */
+class ChampionDAO extends DatabaseManager {
+
+	protected $mapper;
+
+	public function __construct($mapper) {
+		parent::__construct();
+
+		$this->mapper = $mapper;
+	}
 
 	/**
 	 * Get champion static data by given key
@@ -35,12 +50,15 @@ class DatabaseManager {
 			$sql->bindParam(":key", $key, PDO::PARAM_STR);
 			$sql->execute();
 
-			return $sql->fetch(PDO::FETCH_ASSOC);
+			$result = $sql->fetch(PDO::FETCH_ASSOC)
+			
+			return $this->mapper->mapToSingleModel($result);
 		} catch (PDOException $e) {
 			echo $e->errorInfo();
 			return null;
 		}
 	}
+}
 
 	/* Utility functions for converting champion json data to database
 
@@ -117,7 +135,5 @@ class DatabaseManager {
 		}
 	}
 	*/
-
-}
 
 ?>

@@ -30,7 +30,7 @@ require_once 'classes/helpers.php';
 // Initalize required service classes
 $app->summonerService = new SummonerService(new SummonerMapper());
 $app->matchService = new MatchService(new MatchMapper());
-$app->databaseManager = new DatabaseManager();
+$app->championDAO = new ChampionDAO(new ChampionMapper());
 
 //Initialize helpers
 $app->httpHelper = new HTTPHelper($app);

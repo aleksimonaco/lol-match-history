@@ -21,7 +21,7 @@ $app->post('/search', function () use ($app) {
     $match = $app->matchService->getRecentMatchesBySummonerId($summoner->getId());
 
     foreach ($match["games"] as &$game) {
-      $game["championData"] = $app->databaseManager->getChampionByKey($game["championId"]);
+      $game["championData"] = $app->championDAO->getChampionByKey($game["championId"]);
     }
 
     $responseBody = ["match" => $match];
