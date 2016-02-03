@@ -22,14 +22,6 @@ class DatabaseManager {
 		$this->pdo = new PDO($dsn);
 	}
 
-	public function testSelect() {
-		$sql = $this->pdo->query("SELECT * FROM champion");
-		while($result = $sql->fetch(PDO::FETCH_ASSOC)  ) {
-        	print_r($result);
-        	echo "OK";
-    	}
-	}
-
 	/**
 	 * Get champion static data by given key
 	 *

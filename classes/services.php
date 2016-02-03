@@ -1,32 +1,32 @@
 <?php
 
 /**
-* Service
-* 
-*/
+ * Service
+ *
+ */
 class Service {
 
 	protected $mapper, $apiKey, $riotGamesAPI;
 
 	public function __construct($mapper) {
-		$this->mapper = $mapper;
+			$this->mapper = $mapper;
 
-        $this->apiKey = getenv("API_KEY");
-        $this->riotGamesAPI = new RiotGamesAPI();
+      $this->apiKey = getenv("API_KEY");
+      $this->riotGamesAPI = new RiotGamesAPI();
 	}
 }
 
 /**
-* SummonerService
-* 
-*/
+ * SummonerService
+ *
+ */
 class SummonerService extends Service {
 
 	public function __construct($mapper) {
         parent::__construct($mapper);
     }
 
-    /**
+  /**
 	 * Get summoner data by name
 	 *
 	 * @param string $name summoner name
@@ -47,16 +47,16 @@ class SummonerService extends Service {
 
 /**
 * MatchService
-* 
+*
 */
 class MatchService extends Service {
 
 	public function __construct($mapper) {
-        parent::__construct($mapper);
-    }
+    parent::__construct($mapper);
+  }
 
-    /**
-	 * 
+  /**
+	 *
 	 * Get recent match info for summoner by id
 	 *
 	 * @param int $id summoner id

@@ -1,6 +1,6 @@
 <?php
 require 'vendor/autoload.php';
-include 'config.php';
+include_once 'config.php';
 
 // Specify domain
 define("DOMAIN", (getenv("DOMAIN") !== false ? getenv("DOMAIN") : "http://localhost/lol-match-history"));
