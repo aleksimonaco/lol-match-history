@@ -9,10 +9,10 @@ class Service {
 	protected $mapper, $apiKey, $riotGamesAPI;
 
 	public function __construct($mapper) {
-			$this->mapper = $mapper;
+		$this->mapper = $mapper;
 
-      $this->apiKey = getenv("API_KEY");
-      $this->riotGamesAPI = new RiotGamesAPI();
+		$this->apiKey = getenv("API_KEY");
+		$this->riotGamesAPI = new RiotGamesAPI();
 	}
 }
 
@@ -23,8 +23,8 @@ class Service {
 class SummonerService extends Service {
 
 	public function __construct($mapper) {
-        parent::__construct($mapper);
-    }
+		parent::__construct($mapper);
+  }
 
   /**
 	 * Get summoner data by name

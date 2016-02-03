@@ -12,12 +12,12 @@ class DatabaseManager {
 
 		$dbopts = parse_url(getenv("DATABASE_URL"));
 
-	    $dsn = "pgsql:"
-	    . "host=" . $dbopts["host"] . ";"
-	    . "dbname=" . ltrim($dbopts["path"],'/') . ";"
-	    . "user=" . $dbopts["user"] . ";"
-	    . "port=" . $dbopts["port"] . ";"
-	    . "password=" . $dbopts["pass"];
+		$dsn = "pgsql:"
+		. "host=" . $dbopts["host"] . ";"
+		. "dbname=" . ltrim($dbopts["path"],'/') . ";"
+		. "user=" . $dbopts["user"] . ";"
+		. "port=" . $dbopts["port"] . ";"
+		. "password=" . $dbopts["pass"];
 
 		$this->pdo = new PDO($dsn);
 	}

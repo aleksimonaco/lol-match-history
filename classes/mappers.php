@@ -18,7 +18,7 @@ class SummonerMapper extends Mapper {
 	public function __construct() {}
 
 	/**
-	 * 
+	 *
 	 * Map array values to a Summoner model
 	 *
 	 * @param array $values Array that needs to be mapped
@@ -27,18 +27,18 @@ class SummonerMapper extends Mapper {
 	public function mapToSingleModel($values) {
 
 		$summoner = new Summoner(
-			(int) 		$values["id"],
-			(string)	$values["name"], 
-			(int) 		$values["profileIconId"], 
-			(int)		$values["revisionDate"], 
-			(int)		$values["summonerLevel"]
+			(int)			$values["id"],
+			(string)	$values["name"],
+			(int)			$values["profileIconId"],
+			(int)			$values["revisionDate"],
+			(int)			$values["summonerLevel"]
 		);
 
 		return $summoner;
 	}
 
 	/**
-	 * 
+	 *
 	 * Map array values to multiple Summoner models
 	 *
 	 * @param array $values Array that needs to be mapped
@@ -54,7 +54,7 @@ class MatchMapper {
 	public function __construct() {}
 
 	/**
-	 * 
+	 *
 	 * Map array values to a single Match model
 	 *
 	 * @param array $values Array that needs to be mapped
@@ -65,7 +65,7 @@ class MatchMapper {
 	}
 
 	/**
-	 * 
+	 *
 	 * Map array values to multiple Summoner models
 	 *
 	 * @param array $values Array that needs to be mapped
