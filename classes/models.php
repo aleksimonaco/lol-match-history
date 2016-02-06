@@ -54,4 +54,114 @@ class Match {
 	}
 }
 
+class Champion {
+
+	// Key info
+	private $id, $version, $key, $name, $title, $blurb;
+
+	// Basic info
+	private $infoAttack, $infoDefense, $infoMagic, $infoDifficulty;
+
+	// Image info
+	private $imageFull, $imageGroup, $imageX, $imageY, $imageW, $imageH;
+
+	// Stats info
+	private $partype, $statsHp, $statsHpPerLevel, $statsMp, $statsMpPerLevel,
+		$statsMoveSpeed, $statsArmor, $statsArmorPerLevel, $statsSpellBlock,
+		$statsSpellBlockPerLevel, $statsAttackRange, $statsHpRegen, $statsHpRegenPerLevel,
+		$statsMpRegen, $statsMpRegenPerLevel, $statsCrit, $statsCritPerLevel,
+		$statsAttackDamage, $statsAttackDamagePerLevel, $statsAttackSpeedOffset,
+		$statsAttackSpeedPerLevel;
+
+	public function __construct($id, $version, $key, $name, $title, $blurb,
+		$infoAttack, $infoDefense, $infoMagic, $infoDifficulty,
+		$imageFull, $imageGroup, $imageX, $imageY, $imageW, $imageH,
+		$partype, $statsHp, $statsHpPerLevel, $statsMp, $statsMpPerLevel,
+		$statsMoveSpeed, $statsArmor, $statsArmorPerLevel, $statsSpellBlock,
+		$statsSpellBlockPerLevel, $statsAttackRange, $statsHpRegen, $statsHpRegenPerLevel,
+		$statsMpRegen, $statsMpRegenPerLevel, $statsCrit, $statsCritPerLevel,
+		$statsAttackDamage, $statsAttackDamagePerLevel, $statsAttackSpeedOffset,
+		$statsAttackSpeedPerLevel) {
+			$this->id = $id;
+			$this->version = $version;
+			$this->key = $key;
+			$this->name = $name;
+			$this->title = $title;
+			$this->blurb = $blurb;
+			$this->infoAttack = $infoAttack;
+			$this->infoDefense = $infoDefense;
+			$this->infoMagic = $infoMagic;
+			$this->infoDifficulty = $infoDifficulty;
+			$this->imageFull = $imageFull;
+			$this->imageGroup = $imageGroup;
+			$this->imageX = $imageX;
+			$this->imageY = $imageY;
+			$this->imageW = $imageW;
+			$this->imageH = $imageH;
+			$this->partype = $partype;
+			$this->statsHp = $statsHp;
+			$this->statsHpPerLevel = $statsHpPerLevel;
+			$this->statsMp = $statsMp;
+			$this->statsMpPerLevel = $statsMpPerLevel;
+			$this->statsMoveSpeed = $statsMoveSpeed;
+			$this->statsArmor = $statsArmor;
+			$this->statsArmorPerLevel = $statsArmorPerLevel;
+			$this->statsSpellBlock = $statsSpellBlock;
+			$this->statsSpellBlockPerLevel = $statsSpellBlockPerLevel;
+			$this->statsAttackRange = $statsAttackRange;
+			$this->statsHpRegen = $statsHpRegen;
+			$this->statsHpRegenPerLevel = $statsHpRegenPerLevel;
+			$this->statsMpRegen = $statsMpRegen;
+			$this->statsMpRegenPerLevel = $statsMpRegenPerLevel;
+			$this->statsCrit = $statsCrit;
+			$this->statsCritPerLevel = $statsCritPerLevel;
+			$this->statsAttackDamage = $statsAttackDamage;
+			$this->statsAttackDamagePerLevel = $statsAttackDamagePerLevel;
+			$this->statsAttackSpeedOffset = $statsAttackSpeedOffset;
+			$this->statsAttackSpeedPerLevel = $statsAttackSpeedPerLevel;
+	}
+
+	public function toJSON() {
+		return [
+			"id" => $this->id,
+			"version" => $this->version,
+			"key" => $this->key,
+			"name" => $this->name,
+			"title" => $this->title,
+			"blurb" => $this->blurb,
+			"infoAttack" => $this->infoAttack,
+			"infoDefense" => $this->infoDefense,
+			"infoMagic" => $this->infoMagic,
+			"infoDifficulty" => $this->infoDifficulty,
+			"imageFull" => $this->imageFull,
+			"imageGroup" => $this->imageGroup,
+			"imageX" => $this->imageX,
+			"imageY" => $this->imageY,
+			"imageW" => $this->imageW,
+			"imageH" => $this->imageH,
+			"partype" => $this->partype,
+			"statsHp" => $this->statsHp,
+			"statsHpPerLevel" => $this->statsHpPerLevel,
+			"statsMp" => $this->statsMp,
+			"statsMpPerLevel" => $this->statsMpPerLevel,
+			"statsMoveSpeed" => $this->statsMoveSpeed,
+			"statsArmor" => $this->statsArmor,
+			"statsArmorPerLevel" => $this->statsArmorPerLevel,
+			"statsSpellBlock" => $this->statsSpellBlock,
+			"statsSpellBlockPerLevel" => $this->statsSpellBlockPerLevel,
+			"statsAttackRange" => $this->statsAttackRange,
+			"statsHpRegen" => $this->statsHpRegen,
+			"statsHpRegenPerLevel" => $this->statsHpRegenPerLevel,
+			"statsMpRegen" => $this->statsMpRegen,
+			"statsMpRegenPerLevel" => $this->statsMpRegenPerLevel,
+			"statsCrit" => $this->statsCrit,
+			"statsCritPerLevel" => $this->statsCritPerLevel,
+			"statsAttackDamage" => $this->statsAttackDamage,
+			"statsAttackDamagePerLevel" => $this->statsAttackDamagePerLevel,
+			"statsAttackSpeedOffset" => $this->statsAttackSpeedOffset,
+			"statsAttackSpeedPerLevel" => $this->statsAttackSpeedPerLevel
+		];
+	}
+}
+
 ?>

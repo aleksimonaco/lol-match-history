@@ -118,8 +118,6 @@ class MatchMapper extends Mapper {
 		$champion = new Champion(
 			(string)	$values["id"],
 			(string)	$values["version"],
-			(string)	$values["name"],
-			(string)	$values["version"],
 			(string)	$values["key"],
 			(string)	$values["name"],
 			(string)	$values["title"],
@@ -128,6 +126,8 @@ class MatchMapper extends Mapper {
 			(int)		$values["info_defense"],
 			(int)		$values["info_magic"],
 			(int)		$values["info_difficulty"],
+			(string)	$values["image_full"],
+			(string)	$values["image_group"],
 			(string)	$values["image_x"],
 			(string)	$values["image_y"],
 			(string)	$values["image_w"],

@@ -50,8 +50,8 @@ class ChampionDAO extends DatabaseManager {
 			$sql->bindParam(":key", $key, PDO::PARAM_STR);
 			$sql->execute();
 
-			$result = $sql->fetch(PDO::FETCH_ASSOC)
-			
+			$result = $sql->fetch(PDO::FETCH_ASSOC);
+
 			return $this->mapper->mapToSingleModel($result);
 		} catch (PDOException $e) {
 			echo $e->errorInfo();
