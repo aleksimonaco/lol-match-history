@@ -1,9 +1,9 @@
 <?php
 
 /**
-* Service
-* 
-*/
+ * Service
+ *
+ */
 class Service {
 
 	protected $mapper, $apiKey, $riotGamesAPI;
@@ -11,22 +11,22 @@ class Service {
 	public function __construct($mapper) {
 		$this->mapper = $mapper;
 
-        $this->apiKey = getenv("API_KEY");
-        $this->riotGamesAPI = new RiotGamesAPI();
+		$this->apiKey = getenv("API_KEY");
+		$this->riotGamesAPI = new RiotGamesAPI();
 	}
 }
 
 /**
-* SummonerService
-* 
-*/
+ * SummonerService
+ *
+ */
 class SummonerService extends Service {
 
 	public function __construct($mapper) {
-        parent::__construct($mapper);
-    }
+		parent::__construct($mapper);
+  }
 
-    /**
+  /**
 	 * Get summoner data by name
 	 *
 	 * @param string $name summoner name
@@ -47,16 +47,16 @@ class SummonerService extends Service {
 
 /**
 * MatchService
-* 
+*
 */
 class MatchService extends Service {
 
 	public function __construct($mapper) {
-        parent::__construct($mapper);
-    }
+    parent::__construct($mapper);
+  }
 
-    /**
-	 * 
+  /**
+	 *
 	 * Get recent match info for summoner by id
 	 *
 	 * @param int $id summoner id
@@ -65,9 +65,8 @@ class MatchService extends Service {
 	public function getRecentMatchesBySummonerId($id) {
 
 		$json = $this->riotGamesAPI->callAPI("https://euw.api.pvp.net/api/lol/euw/v1.3/game/by-summoner/" . $id . "/recent?api_key=" . $this->apiKey);
-		return $json;
 
-		$matches = $this->mapper->mapToMultipleModel($json["games"]);
+		$matches = $this->mapper->mapToMultipleModels($json["games"]);
 		return $matches;
 	}
 }

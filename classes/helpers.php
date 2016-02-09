@@ -14,25 +14,25 @@ class RiotGamesAPI {
 		$this->rateLimiter = new RateLimiter();
 	}
 
-    /**
-     * Perform a GET request with given url
-     * and return the received JSON
-     *
-     * @param string $url Url to the API from which data is retrieved
-     * @return array $json Data from API as an array, otherwise return error message
-     * if something went wrong with the HTTP request
-     */
+  /**
+   * Perform a GET request with given url
+   * and return the received JSON
+   *
+   * @param string $url Url to the API from which data is retrieved
+   * @return array $json Data from API as an array, otherwise return error message
+   * if something went wrong with the HTTP request
+   */
 	public function callAPI($url) {
 
-        // Check request count from session
+    // Check request count from session
 		$this->rateLimiter->limit();
 
-        try {
-            $result = file_get_contents($url);
-        } catch (ErrorException $e) {
-            return ["error" => "true"];
-        }
-		
+    try {
+        $result = file_get_contents($url);
+    } catch (ErrorException $e) {
+        return ["error" => "true"];
+    }
+
 		$json = json_decode($result, true);
 
 		return $json;
@@ -51,12 +51,12 @@ class HTTPHelper {
 		$this->app = \Slim\Slim::getInstance();
 	}
 
-    /**
-     * Return json data with response code to client
-     *
-     * @param array $data JSON data to be sent to client
-     * @param int $responseCode HTTP status code to return
-     */
+  /**
+   * Return json data with response code to client
+   *
+   * @param array $data JSON data to be sent to client
+   * @param int $responseCode HTTP status code to return
+   */
 	public function json($data, $responseCode) {
 		$this->app->response->headers->set('Content-Type', 'application/json');
 		$this->app->halt($responseCode, json_encode($data, JSON_PRETTY_PRINT));
@@ -69,55 +69,56 @@ class HTTPHelper {
  */
 class RateLimiter {
 
-    protected $timestamp;
-    protected $limit;
-    protected $frequency;
+  protected $timestamp;
+  protected $limit;
+  protected $frequency;
 
-    /**
-     * Create new RateLimiter
-     * Default 10 requests every 10 seconds
-     *
-     * @param int $limit Optional calls per frequency
-     * @param int $frequency Optional frequency in seconds
-     */
-    public function __construct($limit = 5, $frequency = 10) {
-        $this->limit = $limit;
-        $this->frequency = $frequency;
-        $this->timestamp = microtime(true);
+  /**
+   * Create new RateLimiter
+   * Default 10 requests every 10 seconds
+   *
+   * @param int $limit Optional calls per frequency
+   * @param int $frequency Optional frequency in seconds
+   */
+  public function __construct($limit = 5, $frequency = 10) {
+      $this->limit = $limit;
+      $this->frequency = $frequency;
+      $this->timestamp = microtime(true);
+  }
+  /**
+   * Called before every API request
+   *
+   * Check if rate limit is exceeded
+   */
+  public function limit() {
+
+    // Check if new session
+    if (!isset($_SESSION["request_count"])) {
+        $_SESSION["request_count"] = 0;
     }
-    /**
-     * Called before every API request
-     *
-     * Check if rate limit is exceeded
-     */
-    public function limit() {
 
-        // Check if new session
-        if (!isset($_SESSION["request_count"])) {
-            $_SESSION["request_count"] = 0;
-        }
+    // Increment call counter every request
+    $_SESSION["request_count"]++;
 
-        // Increment call counter every request
-        $_SESSION["request_count"]++;
+    // Allow burst of requests until it reaches limit threshold
+    if ($_SESSION["request_count"] >= $this->limit) {
 
-        // Allow burst of requests until it reaches limit threshold
-        if ($_SESSION["request_count"] >= $this->limit) {
+      $now = microtime(true);
+      $duration = $now - $this->timestamp;
 
-            $now = microtime(true);
-            $duration = $now - $this->timestamp;
+      // Check if we have requested limit requests too fast
+      if ($duration < $this->frequency) {
+          $wait = ($this->frequency - ($now - $this->timestamp)) * 1000000;
+          usleep($wait);
+      }
 
-            // Check if we have requested limit requests too fast
-            if ($duration < $this->frequency) {
-                $wait = ($this->frequency - ($now - $this->timestamp)) * 1000000;
-                usleep($wait);
-            }
-            // Reset current timestamp
-            $this->timestamp = microtime(true);
+      // Reset current timestamp
+      $this->timestamp = microtime(true);
 
-            // Reset call counter
-            $_SESSION["request_count"] = 0;
-        }
+      // Reset call counter
+      $_SESSION["request_count"] = 0;
     }
+  }
 }
 
 ?>

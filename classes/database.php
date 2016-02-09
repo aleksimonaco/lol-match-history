@@ -12,22 +12,29 @@ class DatabaseManager {
 
 		$dbopts = parse_url(getenv("DATABASE_URL"));
 
-	    $dsn = "pgsql:"
-	    . "host=" . $dbopts["host"] . ";"
-	    . "dbname=" . ltrim($dbopts["path"],'/') . ";"
-	    . "user=" . $dbopts["user"] . ";"
-	    . "port=" . $dbopts["port"] . ";"
-	    . "password=" . $dbopts["pass"];
+		$dsn = "pgsql:"
+		. "host=" . $dbopts["host"] . ";"
+		. "dbname=" . ltrim($dbopts["path"],'/') . ";"
+		. "user=" . $dbopts["user"] . ";"
+		. "port=" . $dbopts["port"] . ";"
+		. "password=" . $dbopts["pass"];
 
 		$this->pdo = new PDO($dsn);
 	}
+}
 
-	public function testSelect() {
-		$sql = $this->pdo->query("SELECT * FROM champion");
-		while($result = $sql->fetch(PDO::FETCH_ASSOC)  ) {
-        	print_r($result);
-        	echo "OK";
-    	}
+/**
+ * ChampionDAO
+ *
+ */
+class ChampionDAO extends DatabaseManager {
+
+	protected $mapper;
+
+	public function __construct($mapper) {
+		parent::__construct();
+
+		$this->mapper = $mapper;
 	}
 
 	/**
@@ -43,12 +50,15 @@ class DatabaseManager {
 			$sql->bindParam(":key", $key, PDO::PARAM_STR);
 			$sql->execute();
 
-			return $sql->fetch(PDO::FETCH_ASSOC);
+			$result = $sql->fetch(PDO::FETCH_ASSOC);
+
+			return $this->mapper->mapToSingleModel($result);
 		} catch (PDOException $e) {
 			echo $e->errorInfo();
 			return null;
 		}
 	}
+}
 
 	/* Utility functions for converting champion json data to database
 
@@ -125,7 +135,5 @@ class DatabaseManager {
 		}
 	}
 	*/
-
-}
 
 ?>
