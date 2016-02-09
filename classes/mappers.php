@@ -62,10 +62,33 @@ class MatchMapper extends Mapper {
 	 * Map array values to a single Match model
 	 *
 	 * @param array $values Array that needs to be mapped
-	 * @return Match $match mapped model for single match data
+	 * @return Match $match mapped model for single Match data
 	 */
 	public function mapToSingleModel($values) {
-		// TO-DO
+
+		/*
+		 * TO-DO: Check MatchStats model class
+		 * $matchStats = new MatchStats();
+		 */
+
+		$match = new Match(
+			(int)	$values["gameId"],
+			(bool)	$values["invalid"],
+			(string)	$values["gameMode"],
+			(string)	$values["gameType"],
+			(string)	$values["subType"],
+			(int)	$values["mapId"],
+			(int)	$values["teamId"],
+			(int)	$values["championId"],
+			(int)	$values["spell1"],
+			(int)	$values["spell2"],
+			(int)	$values["level"],
+			(int)	$values["ipEarned"],
+			(int)	$values["createDate"],
+			(array)	$values["stats"]
+		);
+
+		return $match;
 	}
 
 	/**
@@ -79,22 +102,10 @@ class MatchMapper extends Mapper {
 
 		$matches = [];
 		foreach ($values as $key => $value) {
-			$match = new Match(
-				/*$this->gameId = $gameId;
-				$this->gameMode = $gameMode;
-				$this->gameType = $gameType;
-				$this->subType = $subType;
-				$this->mapId = $mapId;
-				$this->teamId = $teamId;
-				$this->championId = $championId;
-				$this->spell1 = $spell1;
-				$this->spell2 = $spell2;
-				$this->level = $level;
-				$this->ipEarned = $ipEarned;
-				$this->createDate = $createDate;
-				$this->stats = $stats;*/
-			);
+			array_push($matches, $this->mapToSingleModel($value));
 		}
+
+		return $matches;
 	}
 }
 

@@ -65,9 +65,8 @@ class MatchService extends Service {
 	public function getRecentMatchesBySummonerId($id) {
 
 		$json = $this->riotGamesAPI->callAPI("https://euw.api.pvp.net/api/lol/euw/v1.3/game/by-summoner/" . $id . "/recent?api_key=" . $this->apiKey);
-		return $json;
 
-		$matches = $this->mapper->mapToMultipleModel($json["games"]);
+		$matches = $this->mapper->mapToMultipleModels($json["games"]);
 		return $matches;
 	}
 }

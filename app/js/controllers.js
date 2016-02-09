@@ -7,7 +7,7 @@ lolApp.controller("searchController", function($scope, apiService, recentMatches
 		apiService.getRecentMatches($scope.searchKeyword)
 			  .then(function(data) {
 			    if (data !== undefined) {
-						recentMatchesService.setMatches(data.match.games);
+						recentMatchesService.setMatches(data.matches);
 			    }
 			  });
 	}

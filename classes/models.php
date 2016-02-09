@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Summoner
+ *
+ */
 class Summoner {
 
 	private $id, $name, $profileIconId, $revisionDate, $summonerLevel;
@@ -27,6 +31,10 @@ class Summoner {
 	}
 }
 
+/**
+ * Match
+ *
+ */
 class Match {
 
 	// Match basic info
@@ -36,9 +44,10 @@ class Match {
 	// Match stats info (MatchStats object)
 	private $stats;
 
-	public function __construct($gameId, $gameMode, $gameType, $subType, $mapId, $teamId, $championId,
+	public function __construct($gameId, $invalid, $gameMode, $gameType, $subType, $mapId, $teamId, $championId,
 								$spell1, $spell2, $level, $ipEarned, $createDate, $stats) {
 		$this->gameId = $gameId;
+		$this->invalid = $invalid;
 		$this->gameMode = $gameMode;
 		$this->gameType = $gameType;
 		$this->subType = $subType;
@@ -51,9 +60,70 @@ class Match {
 		$this->ipEarned = $ipEarned;
 		$this->createDate = $createDate;
 		$this->stats = $stats;
+
+		/*
+		* TO-DO: Check MatchStats class
+		* $this->stats = $stats;
+		*/
+	}
+
+	public function toJSON() {
+		return [
+			"gameId" => $this->gameId,
+			"invalid" => $this->invalid,
+			"gameMode" => $this->gameMode,
+			"gameType" => $this->gameType,
+			"subType" => $this->subType,
+			"mapId" => $this->mapId,
+			"teamId" => $this->teamId,
+			"championId" => $this->championId,
+			"spell1" => $this->spell1,
+			"spell2" => $this->spell2,
+			"level" => $this->level,
+			"ipEarned" => $this->ipEarned,
+			"createDate" => $this->createDate,
+			"stats" => $this->stats
+		];
 	}
 }
 
+/**
+ * MatchStats
+ *
+ */
+class MatchStats {
+
+	// Overall Stats
+	private $level, $goldEarned, $turretsKilled, $minionsKilled, $championKilled,
+	$goldSpent, $win, $team, $timePlayed, $assists, $playerRole, $playerPosition,
+	$bountyLevel;
+
+	// Combat Stats
+	private $totalDamageDealt, $totalDamageTaken, $killingSprees, $largestKillingSpree,
+	$largestMultiKill, $physicalDamageDealtPlayer, $magicDamageDealtPlayer,
+	$physicalDamageTaken, $magicDamageTaken, $totalHeal, $totalUnitsHealed,
+	$magicDamageDealtToChampions, $physicalDamageDealtToChampions, $totalDamageDealtToChampions,
+	$trueDamageDealtPlayer, $trueDamageDealtToChampions, $totalTimeCrowdControlDealt;
+
+	// Item Stats
+	private $item0, $item1, $item2, $item3, $item4, $item5, $item6, $wardPlaces;
+
+	public function __construct($level, $goldEarned, $turretsKilled, $minionsKilled, $championKilled,
+	$goldSpent, $win, $team, $timePlayed, $assists, $playerRole, $playerPosition,
+	$bountyLevel, $totalDamageDealt, $totalDamageTaken, $killingSprees, $largestKillingSpree,
+	$largestMultiKill, $physicalDamageDealtPlayer, $magicDamageDealtPlayer,
+	$physicalDamageTaken, $magicDamageTaken, $totalHeal, $totalUnitsHealed,
+	$magicDamageDealtToChampions, $physicalDamageDealtToChampions, $totalDamageDealtToChampions,
+	$trueDamageDealtPlayer, $trueDamageDealtToChampions, $totalTimeCrowdControlDealt,
+	$item0, $item1, $item2, $item3, $item4, $item5, $item6, $wardPlaces) {
+		// TO-DO: Finish implementation and consider Splitting up to further models
+	}
+}
+
+/**
+ * Champion
+ *
+ */
 class Champion {
 
 	// Key info

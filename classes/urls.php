@@ -18,16 +18,20 @@ $app->post('/search', function () use ($app) {
   $summoner = $app->summonerService->getSummonerByName($formattedKeyword);
 
   if (!array_key_exists("error", $summoner)) {
-    $match = $app->matchService->getRecentMatchesBySummonerId($summoner->getId());
+		$matchResponse = [];
 
-    foreach ($match["games"] as &$game) {
-      $game["championData"] = $app->championDAO->getChampionByKey($game["championId"])->toJSON();
-    }
+		$matches = $app->matchService->getRecentMatchesBySummonerId($summoner->getId());
 
-    $responseBody = ["match" => $match];
-  } else {
-    $app->httpHelper->json(["error" => "SUMMONER_NOT_FOUND"], 404);
-  }
+		foreach ($matches as $match) {
+			$matchJSON = $match->toJSON();
+			$matchJSON["championData"] = $app->championDAO->getChampionByKey($matchJSON["championId"])->toJSON();
+			array_push($matchResponse, $matchJSON);
+		}
+
+		$responseBody = ["matches" => $matchResponse];
+	} else {
+		$app->httpHelper->json(["error" => "SUMMONER_NOT_FOUND"], 404);
+	}
 
 	$app->httpHelper->json($responseBody, 200);
 });
