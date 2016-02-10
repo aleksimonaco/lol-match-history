@@ -82,8 +82,36 @@ class Match {
 			"level" => $this->level,
 			"ipEarned" => $this->ipEarned,
 			"createDate" => $this->createDate,
+			"kda" => $this->getKda(),
 			"stats" => $this->stats
 		];
+	}
+
+	private function checkIfAttributeInStats($name) {
+		return array_key_exists($name, $this->stats);
+	}
+
+	private function getStatsAttribute($name) {
+		if ($this->checkIfAttributeInStats($name)) {
+			return $this->stats[$name];
+		} else {
+			$this->stats[$name] = 0;
+			return 0;
+		}
+	}
+
+	private function getKda() {
+		$championsKilled = $this->getStatsAttribute("championsKilled");
+		$numDeaths = $this->getStatsAttribute("numDeaths");
+		$assists = $this->getStatsAttribute("assists");
+
+		if ($numDeaths == 0) {
+			$kda = $championsKilled + $assists;
+		} else {
+			$kda = ($championsKilled + $assists) / $numDeaths;
+		}
+
+		return number_format($kda, 2);
 	}
 }
 
