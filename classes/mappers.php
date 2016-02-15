@@ -72,20 +72,20 @@ class MatchMapper extends Mapper {
 		 */
 
 		$match = new Match(
-			(int)	$values["gameId"],
-			(bool)	$values["invalid"],
-			(string)	$values["gameMode"],
-			(string)	$values["gameType"],
-			(string)	$values["subType"],
-			(int)	$values["mapId"],
-			(int)	$values["teamId"],
-			(int)	$values["championId"],
-			(int)	$values["spell1"],
-			(int)	$values["spell2"],
-			(int)	$values["level"],
-			(int)	$values["ipEarned"],
-			(int)	$values["createDate"],
-			(array)	$values["stats"]
+			$values["gameId"],
+			$values["invalid"],
+			$values["gameMode"],
+			$values["gameType"],
+			$values["subType"],
+			$values["mapId"],
+			$values["teamId"],
+			$values["championId"],
+			$values["spell1"],
+			$values["spell2"],
+			$values["level"],
+			$values["ipEarned"],
+			$values["createDate"],
+			$values["stats"]
 		);
 
 		return $match;
