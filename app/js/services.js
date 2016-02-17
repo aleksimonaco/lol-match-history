@@ -43,3 +43,13 @@ lolApp.factory('recentMatchesService', function() {
     getMatches: getMatches
   }
 });
+
+lolApp.service('dateService', function() {
+  return {
+    getSince: getSince
+  }
+
+  function getSince(timestamp) {
+    return moment(timestamp).fromNow();
+  }
+});

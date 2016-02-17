@@ -27,11 +27,11 @@ class SummonerMapper extends Mapper {
 	public function mapToSingleModel($values) {
 
 		$summoner = new Summoner(
-			(int)			$values["id"],
-			(string)	$values["name"],
-			(int)			$values["profileIconId"],
-			(int)			$values["revisionDate"],
-			(int)			$values["summonerLevel"]
+			$values["id"],
+			$values["name"],
+			$values["profileIconId"],
+			$values["revisionDate"],
+			$values["summonerLevel"]
 		);
 
 		return $summoner;
@@ -72,20 +72,20 @@ class MatchMapper extends Mapper {
 		 */
 
 		$match = new Match(
-			(int)	$values["gameId"],
-			(bool)	$values["invalid"],
-			(string)	$values["gameMode"],
-			(string)	$values["gameType"],
-			(string)	$values["subType"],
-			(int)	$values["mapId"],
-			(int)	$values["teamId"],
-			(int)	$values["championId"],
-			(int)	$values["spell1"],
-			(int)	$values["spell2"],
-			(int)	$values["level"],
-			(int)	$values["ipEarned"],
-			(int)	$values["createDate"],
-			(array)	$values["stats"]
+			$values["gameId"],
+			$values["invalid"],
+			$values["gameMode"],
+			$values["gameType"],
+			$values["subType"],
+			$values["mapId"],
+			$values["teamId"],
+			$values["championId"],
+			$values["spell1"],
+			$values["spell2"],
+			$values["level"],
+			$values["ipEarned"],
+			$values["createDate"],
+			$values["stats"]
 		);
 
 		return $match;
@@ -127,43 +127,43 @@ class MatchMapper extends Mapper {
 	public function mapToSingleModel($values) {
 
 		$champion = new Champion(
-			(string)	$values["id"],
-			(string)	$values["version"],
-			(string)	$values["key"],
-			(string)	$values["name"],
-			(string)	$values["title"],
-			(string)	$values["blurb"],
-			(int)		$values["info_attack"],
-			(int)		$values["info_defense"],
-			(int)		$values["info_magic"],
-			(int)		$values["info_difficulty"],
-			(string)	$values["image_full"],
-			(string)	$values["image_group"],
-			(string)	$values["image_x"],
-			(string)	$values["image_y"],
-			(string)	$values["image_w"],
-			(string)	$values["image_h"],
-			(string)	$values["partype"],
-			(double)	$values["stats_hp"],
-			(double)	$values["stats_hpperlevel"],
-			(double)	$values["stats_mp"],
-			(double)	$values["stats_mpperlevel"],
-			(double)	$values["stats_movespeed"],
-			(double)	$values["stats_armor"],
-			(double)	$values["stats_armorperlevel"],
-			(double)	$values["stats_spellblock"],
-			(double)	$values["stats_spellblockperlevel"],
-			(double)	$values["stats_attackrange"],
-			(double)	$values["stats_hpregen"],
-			(double)	$values["stats_hpregenperlevel"],
-			(double)	$values["stats_mpregen"],
-			(double)	$values["stats_mpregenperlevel"],
-			(double)	$values["stats_crit"],
-			(double)	$values["stats_critperlevel"],
-			(double)	$values["stats_attackdamage"],
-			(double)	$values["stats_attackdamageperlevel"],
-			(double)	$values["stats_attackspeedoffset"],
-			(double)	$values["stats_attackspeedperlevel"]
+			$values["id"],
+			$values["version"],
+			$values["key"],
+			$values["name"],
+			$values["title"],
+			$values["blurb"],
+			$values["info_attack"],
+			$values["info_defense"],
+			$values["info_magic"],
+			$values["info_difficulty"],
+			$values["image_full"],
+			$values["image_group"],
+			$values["image_x"],
+			$values["image_y"],
+			$values["image_w"],
+			$values["image_h"],
+			$values["partype"],
+			$values["stats_hp"],
+			$values["stats_hpperlevel"],
+			$values["stats_mp"],
+			$values["stats_mpperlevel"],
+			$values["stats_movespeed"],
+			$values["stats_armor"],
+			$values["stats_armorperlevel"],
+			$values["stats_spellblock"],
+			$values["stats_spellblockperlevel"],
+			$values["stats_attackrange"],
+			$values["stats_hpregen"],
+			$values["stats_hpregenperlevel"],
+			$values["stats_mpregen"],
+			$values["stats_mpregenperlevel"],
+			$values["stats_crit"],
+			$values["stats_critperlevel"],
+			$values["stats_attackdamage"],
+			$values["stats_attackdamageperlevel"],
+			$values["stats_attackspeedoffset"],
+			$values["stats_attackspeedperlevel"]
 		);
 
 		return $champion;
