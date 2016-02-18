@@ -40,7 +40,7 @@
         </div>
     </nav>
 
-    
+
     <div id="content">
 
       <!--
@@ -63,13 +63,13 @@
       -->
 
       <div id="search" class="row" ng-controller="searchController">
-        
+
         <!--
 
         Search input
 
         -->
-        
+
         <div class="col-xs-12 col-sm-10 col-sm-offset-1">
             <h3 class="col-xs-12 text-center">Type in your summoner name and hit search!</h3>
             <form id="search-form" name="searchForm" class="col-xs-12 col-sm-6 col-sm-offset-3" novalidate ng-submit="searchForm.$valid && search()">
@@ -88,12 +88,18 @@
         -->
 
         <div id="search-result" class="col-xs-12">
-          <div class="matches col-xs-12 col-md-8 col-md-offset-2 text-center" ng-repeat="match in matches">
+          <div class="matches col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2" ng-repeat="match in matches">
             <recent-match match=match></recent-match>
           </div>
         </div>
       </div>
     </div>
+
+  <!--
+
+  Footer
+
+  -->
 
   <div id="footer">{% block footer %}{% endblock %}</div>
 

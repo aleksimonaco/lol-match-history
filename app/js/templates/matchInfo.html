@@ -1,16 +1,58 @@
-<div class="panel panel-default">
-    <div class="panel-body">
-        <div class="col-xs-4">
-                <img class="match-champion-icon" alt="Champion icon" src="http://ddragon.leagueoflegends.com/cdn//* match.championData.version *//img/champion//* match.championData.image_full */" />
-                <!-- <div class="match-champion-icon champion-icon-unknown"><i class="fa fa-question fa-3x"></i></div> -->
+<div class="panel panel-default match-single">
+    <div class="col-xs-12 panel-heading match-heading">
+            <span class="col-xs-4 text-left">/* match.createDate | date:'dd MMM yyyy HH:mm'*/</span>
+            <span class="col-xs-4 text-center">/* match.subType */ - /* match.stats.playerPosition */</span>
+    </div>
+
+    <div class="panel-body match-detail-wrapper">
+
+        <span class="vs">VS</span>
+        <span class="glyphicon glyphicon-chevron-down expander"></span>
+        <div class="you col-xs-6">
+            <div class="col-xs-3 col-xs-offset-4 col-sm-offset-0 match-champion-icon-wrapper">
+              <img class="match-champion-icon pull-left" alt="Champion icon" src="http://ddragon.leagueoflegends.com/cdn//* match.championData.version *//img/champion//* match.championData.image_full */" />
+              <img class="summonerspell-icon pull-left" alt="Champion icon" src="http://ddragon.leagueoflegends.com/cdn//* match.championData.version *//img/champion//* match.championData.image_full */" />
+              <img class="summonerspell-icon pull-left" alt="Champion icon" src="http://ddragon.leagueoflegends.com/cdn//* match.championData.version *//img/champion//* match.championData.image_full */" />
+              <!-- <div class="match-champion-icon champion-icon-unknown"><i class="fa fa-question fa-3x"></i></div> -->
+            </div>
+            <div class="col-xs-12 col-sm-8">
+                <table class="table table-condensed match-details">
+                    <tr>
+                      <td>K/D/A:</td>
+                      <td>/* match.stats.championsKilled */ / /* match.stats.numDeaths */ / /* match.stats.assists */ (/* (match.stats.championsKilled+match.stats.assists)/match.stats.numDeaths | number:1 */)</td>
+                    </tr>
+                      <td>Dmg dealt:</td>
+                      <td>/* match.stats.damageDealtPlayer */ </td>
+                    <tr>
+                      <td>K/D/A:</td>
+                      <td>/* match.stats.championsKilled */ / /* match.stats.numDeaths */ / /* match.stats.assists */ (/* (match.stats.championsKilled+match.stats.assists)/match.stats.numDeaths | number:1 */)</td>
+                    </tr>
+
+                </table>
+            </div>
         </div>
-        <div class="col-xs-4">
-            <h4>/* match.gameMode */</h4>
-            <h2>/* match.since */</h2>
-        </div>
-        <div class="col-xs-4">
-            <h4>/* match.stats.championsKilled */ / /* match.stats.numDeaths */ / /* match.stats.assists */</h4>
-            <h2>KDA /* match.kda */</h2>
+        <div class="enemy col-xs-6">
+            <div class="col-xs-8 col-xs-offset-1 details-wrapper">
+                <table class="table table-condensed match-details">
+                    <tr>
+                      <td>K/D/A:</td>
+                      <td>/* match.stats.championsKilled */ / /* match.stats.numDeaths */ / /* match.stats.assists */ (/* (match.stats.championsKilled+match.stats.assists)/match.stats.numDeaths | number:1 */)</td>
+                    </tr>
+                    </tr>
+                      <td>Dmg dealt:</td>
+                      <td>/* match.stats.damageDealtPlayer */ </td>
+                    <tr>
+                      <td>K/D/A:</td>
+                      <td>/* match.stats.championsKilled */ / /* match.stats.numDeaths */ / /* match.stats.assists */ (/* (match.stats.championsKilled+match.stats.assists)/match.stats.numDeaths | number:1 */)</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-xs-3 pull-right match-champion-icon-wrapper">
+              <img class="match-champion-icon pull-right" alt="Champion icon" src="http://ddragon.leagueoflegends.com/cdn//* match.championData.version *//img/champion//* match.championData.image_full */" />
+              <img class="summonerspell-icon pull-right" alt="Champion icon" src="http://ddragon.leagueoflegends.com/cdn//* match.championData.version *//img/champion//* match.championData.image_full */" />
+              <img class="summonerspell-icon pull-right" alt="Champion icon" src="http://ddragon.leagueoflegends.com/cdn//* match.championData.version *//img/champion//* match.championData.image_full */" />
+              <!-- <div class="match-champion-icon champion-icon-unknown"><i class="fa fa-question fa-3x"></i></div> -->
+            </div>
         </div>
     </div>
 </div>
