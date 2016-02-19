@@ -87,23 +87,26 @@ class Match {
 		];
 	}
 
-	private function checkIfAttributeInStats($name) {
-		return array_key_exists($name, $this->stats);
+	private function getStatsAttribute($name) {
+			return $this->stats[$name];
 	}
 
-	private function getStatsAttribute($name) {
-		if ($this->checkIfAttributeInStats($name)) {
-			return $this->stats[$name];
-		} else {
-			$this->stats[$name] = 0;
-			return 0;
+	private function setStatAttribute($name, $value = 0) {
+		$this->stats[$name] = $value;
+	}
+
+	private function checkAndReturnAttributeInStats($name) {
+		if (!array_key_exists($name, $this->stats)) {
+			$this->setStatAttribute($name);
 		}
+
+		return $this->getStatsAttribute($name);
 	}
 
 	private function getKda() {
-		$championsKilled = $this->getStatsAttribute("championsKilled");
-		$numDeaths = $this->getStatsAttribute("numDeaths");
-		$assists = $this->getStatsAttribute("assists");
+		$championsKilled = $this->checkAndReturnAttributeInStats("championsKilled");
+		$numDeaths = $this->checkAndReturnAttributeInStats("numDeaths");
+		$assists = $this->checkAndReturnAttributeInStats("assists");
 
 		if ($numDeaths == 0) {
 			$kda = $championsKilled + $assists;
