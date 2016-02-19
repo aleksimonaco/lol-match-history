@@ -13,7 +13,7 @@ lolApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
     when('/', {
-        templateUrl: 'http://localhost/lol-match-history/app/js/templates/search.html',
+        templateUrl: '/lol-match-history/app/js/templates/search.html',
         controller: 'searchController'
       }).
       otherwise({
