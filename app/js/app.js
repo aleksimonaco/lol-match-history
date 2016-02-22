@@ -12,9 +12,13 @@ lolApp.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
 lolApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
-    when('/', {
+      when('/', {
         templateUrl: '/lol-match-history/app/js/templates/search.html',
         controller: 'searchController'
+      }).
+      when('/match/:id', {
+        templateUrl: '/lol-match-history/app/js/templates/matchDetails.html',
+        controller: 'matchDetailController'
       }).
       otherwise({
         redirectTo: '/'

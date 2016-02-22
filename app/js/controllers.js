@@ -22,3 +22,7 @@ lolApp.controller("searchController", function($scope, apiService, recentMatches
 	}, true);
 
 });
+
+lolApp.controller("matchDetailController", ['$routeParams', function($routeParams) {
+	console.log($routeParams);
+}]);
