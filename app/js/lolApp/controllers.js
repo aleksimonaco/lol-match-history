@@ -12,7 +12,7 @@ lolApp.controller("searchController", ['$scope', 'apiService', 'recentMatchesSer
 				    }
 				  });
 				}
-
+				
 		// Watch for changes in recent matches data
 		$scope.$watch(function() {
 			return recentMatchesService.getMatches();
