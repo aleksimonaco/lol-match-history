@@ -1,0 +1,18 @@
+{
+  "name": "lol-match-history",
+  "version": "0.0.1",
+  "description": "LolPerformance js app dependencies",
+  "repository": "https://github.com/aleksimonaco/lol-match-history.git",
+  "author": "Aleksi Monaco <aleksi.monaco@hotmail.com>",
+  "engines": {
+    "node": ">= 0.4.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-jshint": "^2.0.0",
+    "gulp-uglify": "^1.5.2",
+    "jshint": "^2.9.1"
+  },
+  "license": "MIT"
+}
