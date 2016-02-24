@@ -1,10 +1,13 @@
-var gulp = require('gulp');
-var jshint = require('gulp-jshint');
-var uglify = require('gulp-uglify');
-var concat = require('gulp-concat');
+var gulp = require('gulp'),
+    jshint = require('gulp-jshint'),
+    uglify = require('gulp-uglify'),
+    concat = require('gulp-concat');
+    watch = require('gulp-watch');
+
+var jsPaths = ['./lolApp/*.js'];
 
 gulp.task('js', function() {
-  return gulp.src('./lolApp/*.js')
+  return gulp.src(jsPaths)
     .pipe(jshint())
     .pipe(jshint.reporter('default'))
     .pipe(uglify({mangle: false}))
@@ -12,4 +15,8 @@ gulp.task('js', function() {
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('default', ['js'], function() {});
+gulp.task('watch', function() {
+  gulp.watch(jsPaths, ['js']);
+});
+
+gulp.task('default', ['js', 'watch']);
