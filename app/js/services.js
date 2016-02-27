@@ -34,13 +34,13 @@ lolApp.factory('recentMatchesService', function() {
   }
 
   function getMatch(id) {
-    var length = matches.length;
-    //TO-DO: return single match object
+    return _.findWhere(matches, {gameId: id});
   }
 
   return {
     setMatches: setMatches,
-    getMatches: getMatches
+    getMatches: getMatches,
+    getMatch: getMatch
   }
 });
 

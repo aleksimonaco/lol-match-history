@@ -1,28 +1,32 @@
-lolApp.controller("searchController", function($scope, apiService, recentMatchesService) {
+/* SearchController */
+lolApp.controller("searchController", ['$scope', 'apiService', 'recentMatchesService',
+	function($scope, apiService, recentMatchesService) {
+		$scope.searchKeyword = "";
+		$scope.matches = recentMatchesService.getMatches();
 
-	$scope.searchKeyword = "";
-	$scope.matches = recentMatchesService.getMatches();
+		$scope.search = function() {
+			apiService.getRecentMatches($scope.searchKeyword)
+				  .then(function(data) {
+				    if (data !== undefined) {
+							recentMatchesService.setMatches(data.matches);
+				    }
+				  });
+				}
 
-	$scope.search = function() {
-		apiService.getRecentMatches($scope.searchKeyword)
-			  .then(function(data) {
-			    if (data !== undefined) {
-						recentMatchesService.setMatches(data.matches);
-			    }
-			  });
+		// Watch for changes in recent matches data
+		$scope.$watch(function() {
+			return recentMatchesService.getMatches();
+		}, function(newValue, oldValue) {
+	  	if (newValue !== oldValue) {
+				$scope.matches = newValue;
+			}
+		}, true);
 	}
+]);
 
-	// Watch for changes in recent matches data
-	$scope.$watch(function() {
-		return recentMatchesService.getMatches();
-	}, function(newValue, oldValue) {
-  	if (newValue !== oldValue) {
-			$scope.matches = newValue;
-		}
-	}, true);
-
-});
-
-lolApp.controller("matchDetailController", ['$routeParams', function($routeParams) {
-	console.log($routeParams);
-}]);
+/* MatchDetailController */
+lolApp.controller("matchDetailController", ['$scope', '$routeParams', 'recentMatchesService',
+	function($scope, $routeParams, recentMatchesService) {
+		$scope.match = recentMatchesService.getMatch(parseInt($routeParams.id));
+	}
+]);
