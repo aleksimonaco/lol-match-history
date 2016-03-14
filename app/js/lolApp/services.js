@@ -15,7 +15,7 @@ lolApp.service('apiService', function($http) {
     }
 
     function handleError(response) {
-        console.log(response); //TO-DO: handle http error properly
+        return response.data.error;
     }
 
     return(request.then(handleSuccess, handleError));

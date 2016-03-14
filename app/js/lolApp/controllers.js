@@ -7,9 +7,12 @@ lolApp.controller("searchController", ['$scope', 'apiService', 'recentMatchesSer
 		$scope.search = function() {
 			apiService.getRecentMatches($scope.searchKeyword)
 				  .then(function(data) {
-				    if (data !== undefined) {
+				    if (data === "SUMMONER_NOT_FOUND") {
+							$scope.summonerNotFound = true;
+				    } else {
+							$scope.summonerNotFound = false;
 							recentMatchesService.setMatches(data.matches);
-				    }
+						}
 				  });
 				};
 
