@@ -1,8 +1,10 @@
 /* SearchController */
 lolApp.controller("searchController", ['$scope', 'apiService', 'recentMatchesService',
 	function($scope, apiService, recentMatchesService) {
-		$scope.searchKeyword = "";
-		$scope.matches = recentMatchesService.getMatches();
+		$scope.init = function() {
+			$scope.searchKeyword = "";
+			$scope.matches = recentMatchesService.getMatches();
+		};
 
 		$scope.search = function() {
 			apiService.getRecentMatches($scope.searchKeyword)
@@ -24,12 +26,18 @@ lolApp.controller("searchController", ['$scope', 'apiService', 'recentMatchesSer
 				$scope.matches = newValue;
 			}
 		}, true);
+
+		$scope.init();
 	}
 ]);
 
 /* MatchDetailController */
 lolApp.controller("matchDetailController", ['$scope', '$routeParams', 'recentMatchesService',
 	function($scope, $routeParams, recentMatchesService) {
-		$scope.match = recentMatchesService.getMatch(parseInt($routeParams.id));
+		$scope.init = function() {
+			$scope.match = recentMatchesService.getMatch(parseInt($routeParams.id));
+		};
+
+		$scope.init();
 	}
 ]);
