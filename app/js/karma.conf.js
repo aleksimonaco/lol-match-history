@@ -14,6 +14,7 @@ module.exports = function(config) {
       'bower_components/angular-mocks/angular-mocks.js',
       'bower_components/angular-loading-bar/src/loading-bar.js',
       'bower_components/angular-animate/angular-animate.min.js',
+      'bower_components/angular-local-storage/dist/angular-local-storage.min.js',
       'bower_components/moment/moment.js',
       'lolApp/*js',
       'test/*.spec.js'
