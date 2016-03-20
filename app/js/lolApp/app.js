@@ -1,4 +1,5 @@
-var lolApp = angular.module('lolApp', ['angular-loading-bar', 'ngAnimate', 'ngRoute']);
+var lolApp = angular.module('lolApp',
+  ['angular-loading-bar', 'ngAnimate', 'ngRoute', 'LocalStorageModule']);
 
 lolApp.config(function($interpolateProvider) {
   $interpolateProvider.startSymbol('/*');
@@ -23,5 +24,13 @@ lolApp.config(['$routeProvider',
       otherwise({
         redirectTo: '/'
       });
+  }
+]);
+
+lolApp.config(['localStorageServiceProvider', 
+  function (localStorageServiceProvider) {
+    localStorageServiceProvider
+      .setPrefix('lolApp')
+      .setStorageType('sessionStorage');
   }
 ]);
