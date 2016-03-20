@@ -1,7 +1,7 @@
 var gulp = require('gulp'),
     jshint = require('gulp-jshint'),
     uglify = require('gulp-uglify'),
-    concat = require('gulp-concat');
+    concat = require('gulp-concat'),
     watch = require('gulp-watch'),
     Server = require('karma').Server;
 
