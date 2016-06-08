@@ -6,7 +6,7 @@ lolApp.service('apiService', function($http) {
   function getRecentMatches(summonerName) {
     var request = $http({
 		  method: 'POST',
-		  url: '/lol-match-history/search',
+		  url: '/search',
 		  data: { "search_keyword": summonerName }
 		});
 

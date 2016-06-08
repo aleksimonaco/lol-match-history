@@ -14,11 +14,11 @@ lolApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
       when('/', {
-        templateUrl: '/lol-match-history/app/js/templates/search.html',
+        templateUrl: '/app/js/templates/search.html',
         controller: 'searchController'
       }).
       when('/match/:id', {
-        templateUrl: '/lol-match-history/app/js/templates/matchDetails.html',
+        templateUrl: '/app/js/templates/matchDetails.html',
         controller: 'matchDetailController'
       }).
       otherwise({
@@ -27,7 +27,7 @@ lolApp.config(['$routeProvider',
   }
 ]);
 
-lolApp.config(['localStorageServiceProvider', 
+lolApp.config(['localStorageServiceProvider',
   function (localStorageServiceProvider) {
     localStorageServiceProvider
       .setPrefix('lolApp')
